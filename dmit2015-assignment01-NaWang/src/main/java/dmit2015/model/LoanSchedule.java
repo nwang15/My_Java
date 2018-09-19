@@ -7,7 +7,7 @@ public class LoanSchedule {
 	private double principalPaid;
 	private double remainingBalance;
 
-}
+
 
 
 
@@ -44,7 +44,7 @@ public void setRemainingBalance(double remainingBalance) {
 	this.remainingBalance = remainingBalance;
 }
 
-public public LoanSchedule() {
+public LoanSchedule() {
 	super();
 	// TODO Auto-generated constructor stub
 	this.paymentNumber = 1;
@@ -68,6 +68,6 @@ public String toString() {
 			+ principalPaid + ", remainingBalance=" + remainingBalance + "]";
 }
 
-
+}
 
 
