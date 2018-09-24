@@ -46,10 +46,43 @@ public class Loan {
 //	
 	public double getMonthlyPayment()
 	{
-		
+		return mortgageAmount*(Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1)/(1-Math.pow(Math.pow(((1+annualInterestRate)/200),1.0/6.0)+1, -12*amortizationPeriod));
 	}
+	
+	public double getPrincipalPaid() {
+		
+		return getMonthlyPayment() - getInterestPaid();
+	}
+
+	public double getInterestPaid() {
+		return getMonthlyPayment() * ((Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1) * getMortgageAmount());
+	}
+	
 	public LoanSchedule[] getLoanScheduleArray()
 	{
+		
+		
+		int totalPayments = amortizationPeriod * 12;
+		LoanSchedule[] loanScheduleTable = new LoanSchedule[totalPayments];
+		
+		for(int paymentNumber =1; paymentNumber<= totalPayments; paymentNumber++)
+		{
+			LoanSchedule currentLoanSchedule = new LoanSchedule();
+			int index = paymentNumber -1;
+			loanScheduleTable[index] = currentLoanSchedule;
+			
+			currentLoanSchedule.setPaymentNumber(paymentNumber +1);
+			currentLoanSchedule.setInterestPaid();
+			currentLoanSchedule.setPrincipalPaid();
+			currentLoanSchedule.setRemainingBalance();
+			
+			
+			
+			
+		}
+		
+		return loanScheduleTable;
+				//Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1;
 		
 	}
 	
