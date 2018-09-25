@@ -63,12 +63,21 @@ public class Loan {
 		
 		
 		int totalPayments = amortizationPeriod * 12;
+		double principalPaid = getPrincipalPaid();
+		double insterestPaid = getInterestPaid();
+		double amount = mortgageAmount;
+		double mpp = monthlyPercentageRate();
+		double remainingBalance = 0;
+		
 		LoanSchedule[] loanScheduleTable = new LoanSchedule[totalPayments];
 		
 		for(int paymentNumber =1; paymentNumber<= totalPayments; paymentNumber++)
 		{
-			LoanSchedule currentLoanSchedule = new LoanSchedule();
-			int index = paymentNumber -1;
+			// LoanSchedule currentLoanSchedule = new LoanSchedule();
+			
+			
+			insterestPaid = mpp *amount;
+			
 			loanScheduleTable[index] = currentLoanSchedule;
 			
 			currentLoanSchedule.setPaymentNumber(paymentNumber +1);
@@ -81,12 +90,12 @@ public class Loan {
 			
 		}
 		
-		return loanScheduleTable;
-				//Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1;
+		return 
+				
 		
-	}
-	
-	
-	
+		public double monthlyPercentageRate()
+		{
+			return Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1;
+		}
 
 }
