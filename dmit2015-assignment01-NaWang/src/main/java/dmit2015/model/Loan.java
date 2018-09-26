@@ -49,13 +49,11 @@ public class Loan {
 		return mortgageAmount*(Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1)/(1-Math.pow(Math.pow(((1+annualInterestRate)/200),1.0/6.0)+1, -12*amortizationPeriod));
 	}
 	
-	public double getPrincipalPaid() {
-		
-		return getMonthlyPayment() - getInterestPaid();
-	}
+	
 
-	public double getInterestPaid() {
-		return getMonthlyPayment() * ((Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1) * getMortgageAmount());
+	public double getInterestPaid() 
+	{
+		return monthlyPercentageRate() * mortgageAmount;
 	}
 	
 	public LoanSchedule[] getLoanScheduleArray()
@@ -78,24 +76,50 @@ public class Loan {
 			
 			insterestPaid = mpp *amount;
 			
-			loanScheduleTable[index] = currentLoanSchedule;
-			
-			currentLoanSchedule.setPaymentNumber(paymentNumber +1);
-			currentLoanSchedule.setInterestPaid();
-			currentLoanSchedule.setPrincipalPaid();
-			currentLoanSchedule.setRemainingBalance();
+			principalPaid = getMonthlyPayment() - insterestPaid;
+			amount-=principalPaid;
+			remainingBalance = amount;
 			
 			
 			
+			loanScheduleTable[paymentNumber] = new LoanSchedule();
 			
+			loanScheduleTable[paymentNumber].setPaymentNumber(paymentNumber +1);
+			loanScheduleTable[paymentNumber].setInterestPaid(insterestPaid);
+			loanScheduleTable[paymentNumber].setPrincipalPaid(principalPaid);
+			loanScheduleTable[paymentNumber].setRemainingBalance(remainingBalance);
+			
+		
 		}
 		
-		return 
+		return loanScheduleTable;
+	}
 				
 		
 		public double monthlyPercentageRate()
 		{
 			return Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1;
 		}
+		
+		public double getPrincipalPaid()
+		{
+			return getMonthlyPayment() - getInterestPaid();
+		}
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 }
