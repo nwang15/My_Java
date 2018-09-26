@@ -20,6 +20,27 @@
 
 		<!-- Put your code for assignment 1 below here  -->
 
+  		<b:form>
+			<b:messages id="messages" />
+
+			<b:inputText id="mortgageAmount" label="Mortgage Amount"
+				value="#{currentHelloController.username}" required="true"
+				requiredMessage="Mortgage Amount value is required">			
+				<b:focus />
+			</b:inputText>
+			
+			<b:inputText id="InterestRate" label="Interest Rate"
+				value="#{currentHelloController.username}" required="true"
+				requiredMessage="Interest Rate value is required">			
+				<b:focus />
+			</b:inputText>
+			
+
+			<b:commandButton value="Submit" look="primary"
+				actionListener="#{currentHelloController.sayHello}"
+				update="messages">
+			</b:commandButton>
+		</b:form>
 
 
 
