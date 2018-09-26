@@ -40,8 +40,13 @@ public class LoanController implements Serializable
 		  
 	         
 		  loanChart.setTitle("Mortgage Amortization Paydown");
-		  loanChart.setLegendPosition("ne");
-	         
+		  // loanChart.setLegendPosition("ne");
+		  
+//		  loanChart = new BarChartModel();
+//			
+//		  loanChart.setTitle("Amortization Schedule")
+//	         
+		  
 	        Axis xAxis = loanChart.getAxis(AxisType.X);
 	        xAxis.setLabel("Years");
 	         
