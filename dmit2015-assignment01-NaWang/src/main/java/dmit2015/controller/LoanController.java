@@ -3,6 +3,9 @@ package dmit2015.controller;
 import java.awt.ActiveEvent;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
+
+import org.highfaces.component.chartserie.ChartSerie;
 import org.omnifaces.util.Messages;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -13,49 +16,61 @@ import dmit2015.model.LoanSchedule;
 
 public class LoanController implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	private Loan currentLoan = new Loan();
 	private BarChartModel loanChart; 
 	private LoanSchedule[] currentLoanTable;
 	
 	
-	public void init()
-	{
-		createBarModel();
-	}
-	
 	public void calculate(ActiveEvent event)
 	{
 		currentLoanTable = currentLoan.getLoanScheduleArray();
+		//setCurrentLoanTable(currentLoan.getLoanScheduleArray());
+		
 		Messages.addGlobalInfo("Your monthly mortagage payment is " + String.format("$%,.2f", currentLoan.getMonthlyPayment()));
+		
 		createBarModels();
 	}
-	private void createBarModels() {
-        createBarModel();
-        //createHorizontalBarModel();
-    }
-     
 	
-	  private void createBarModel() {
-		  
-		  
-	         
-		  loanChart.setTitle("Mortgage Amortization Paydown");
-		  // loanChart.setLegendPosition("ne");
-		  
-//		  loanChart = new BarChartModel();
-//			
-//		  loanChart.setTitle("Amortization Schedule")
-//	         
-		  
-	        Axis xAxis = loanChart.getAxis(AxisType.X);
-	        xAxis.setLabel("Years");
-	         
-	        Axis yAxis = loanChart.getAxis(AxisType.Y);
-	        yAxis.setLabel("amortgage Amount");
-//	        yAxis.setMin(0);
-//	        yAxis.setMax(200);
-	    }
-	  
+	@PostConstruct
+	public void init()
+	{
+		loanChart = new BarChartModel();
+		
+		loanChart.setTitle("Amortization Schedule");
+		
+		Axis xAxis = loanChart.getAxis(AxisType.X);
+        xAxis.setLabel("Years");
+         
+        Axis yAxis = loanChart.getAxis(AxisType.Y);
+        yAxis.setLabel("Mortgage Amount");
+        
+		//createBarModel();
+	}
+	
+	
+	public void createBarModels() {
+        //createBarModel();
+        //createHorizontalBarModel();
+        
+        loanChart.clear();
+        
+        ChartSerie amountSeries = new ChartSerie();
+        
+        //amountSeries.setDataLabel("Amortization in Years");
+        
+        for(LoanSchedule currentLoanSchedule : currentLoan.getLoanScheduleArray())
+        {
+        	if(currentLoanSchedule.getPaymentNumber()%12 == 0) 
+			{
+				amountSeries.set	
+				(currentLoanSchedule.getPaymentNumber()/12, currentLoanSchedule.getRemainingBalance());
+			}
+        }
+        loanChart.addSeries(amountSeries);
+    }
+    
+	
 
 		public Loan getCurrentLoan() {
 			return currentLoan;
