@@ -76,7 +76,7 @@ public class Loan {
 		
 		LoanSchedule[] loanScheduleTable = new LoanSchedule[totalPayments];
 		
-		for(int paymentNumber = 1; paymentNumber< totalPayments; paymentNumber++)
+		for(int paymentNumber = 1; paymentNumber <= totalPayments; paymentNumber++)
 		{
 			// LoanSchedule currentLoanSchedule = new LoanSchedule();
 			
@@ -84,17 +84,17 @@ public class Loan {
 			insterestPaid = mpp * amount;
 			
 			principalPaid = getMonthlyPayment() - insterestPaid;
-			amount-=principalPaid;
+			amount -= principalPaid;
 			remainingBalance = amount;
 			
 			
 			
-			loanScheduleTable[paymentNumber] = new LoanSchedule();
+			loanScheduleTable[paymentNumber - 1] = new LoanSchedule();
 			
-			loanScheduleTable[paymentNumber].setPaymentNumber(paymentNumber +1);
-			loanScheduleTable[paymentNumber].setInterestPaid(insterestPaid);
-			loanScheduleTable[paymentNumber].setPrincipalPaid(principalPaid);
-			loanScheduleTable[paymentNumber].setRemainingBalance(remainingBalance);
+			loanScheduleTable[paymentNumber - 1 ].setPaymentNumber(paymentNumber);
+			loanScheduleTable[paymentNumber - 1].setInterestPaid(insterestPaid);
+			loanScheduleTable[paymentNumber - 1].setPrincipalPaid(principalPaid);
+			loanScheduleTable[paymentNumber - 1].setRemainingBalance(remainingBalance);
 			
 		
 		}

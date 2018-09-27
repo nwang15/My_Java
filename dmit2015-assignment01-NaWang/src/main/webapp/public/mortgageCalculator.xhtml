@@ -40,9 +40,11 @@
 				requiredMessage="Interest Rate value is required">			
 				<b:focus />
 			</b:inputText>
+			
 			<b:commandButton value="Calculate" look="primary"
+				ajax="false"
 				actionListener="#{currentLoanController.calculate}"
-				update="messages">
+				update="messages transactions">
 			</b:commandButton>
 			
 			 <b:dataTable id="transactions"
