@@ -4,16 +4,20 @@ import java.awt.ActiveEvent;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
-import org.highfaces.component.chartserie.ChartSerie;
 import org.omnifaces.util.Messages;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 import dmit2015.model.Loan;
 import dmit2015.model.LoanSchedule;
 
+@Named("currentLoanController")
+@SessionScoped
 public class LoanController implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +59,7 @@ public class LoanController implements Serializable
         
         loanChart.clear();
         
-        ChartSerie amountSeries = new ChartSerie();
+        ChartSeries amountSeries = new ChartSeries();
         
         //amountSeries.setDataLabel("Amortization in Years");
         

@@ -24,22 +24,58 @@
 			<b:messages id="messages" />
 
 			<b:inputText id="mortgageAmount" label="Mortgage Amount"
-				value="#{currentHelloController.username}" required="true"
+				value="#{currentLoanController.currentLoan.mortgageAmount}" required="true"
 				requiredMessage="Mortgage Amount value is required">			
 				<b:focus />
 			</b:inputText>
 			
 			<b:inputText id="InterestRate" label="Interest Rate"
-				value="#{currentHelloController.username}" required="true"
+				value="#{currentLoanController.currentLoan.annualInterestRate}" required="true"
 				requiredMessage="Interest Rate value is required">			
 				<b:focus />
 			</b:inputText>
 			
-
+				<b:inputText id="Period" label="Amoritization Period"
+				value="#{currentLoanController.currentLoan.amortizationPeriod}" required="true"
+				requiredMessage="Interest Rate value is required">			
+				<b:focus />
+			</b:inputText>
 			<b:commandButton value="Calculate" look="primary"
-				actionListener="#{currentHelloController.sayHello}"
+				actionListener="#{currentLoanController.calculate}"
 				update="messages">
 			</b:commandButton>
+			
+			 <b:dataTable id="transactions"
+				value="#{currentLoanController.currentLoan.loanScheduleArray}"
+				var="currentTransaction">
+				<b:dataTableColumn label="Payment Number">
+					<h:outputText value="#{currentTransaction.paymentNumber}">
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Payment">
+					<h:outputText value="#{currentLoanController.currentLoan.monthlyPayment}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Interest">
+					<h:outputText value="#{currentTransaction.interestPaid}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Principal">
+					<h:outputText value="#{currentTransaction.principalPaid}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Balance">
+					<h:outputText value="#{currentTransaction.remainingBalance}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+			</b:dataTable>
+			
+			   <p:chart id="bar" type="bar" model="#{currentLoanController.loanChart}" style="height:300px"/>
+			
 		</b:form>
 
 
