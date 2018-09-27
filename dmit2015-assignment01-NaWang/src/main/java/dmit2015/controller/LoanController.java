@@ -1,10 +1,12 @@
 package dmit2015.controller;
 
-import java.awt.ActiveEvent;
+
+
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
@@ -26,7 +28,7 @@ public class LoanController implements Serializable
 	private LoanSchedule[] currentLoanTable;
 	
 	
-	public void calculate(ActiveEvent event)
+	public void calculate(ActionEvent event)
 	{
 		currentLoanTable = currentLoan.getLoanScheduleArray();
 		//setCurrentLoanTable(currentLoan.getLoanScheduleArray());

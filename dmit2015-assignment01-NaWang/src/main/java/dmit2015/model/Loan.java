@@ -1,5 +1,7 @@
 package dmit2015.model;
 
+import java.util.Arrays;
+
 public class Loan {
 	
 	private double mortgageAmount;
@@ -22,45 +24,6 @@ public class Loan {
 	{
 		return mortgageAmount*(Math.pow((1+annualInterestRate/200),(1.0/6.0))-1)
 				/(1-Math.pow(Math.pow((1+annualInterestRate/200),(1.0/6.0)), (-12*amortizationPeriod)));
-	}
-	
-	public LoanSchedule[] getLoanScheduleArray()
-	{
-		
-		
-		int totalPayments = amortizationPeriod * 12;
-		double principalPaid = getPrincipalPaid();
-		double insterestPaid = getInterestPaid();
-		double amount = mortgageAmount;
-		double mpp = monthlyPercentageRate();
-		double remainingBalance = 0;
-		
-		LoanSchedule[] loanScheduleTable = new LoanSchedule[totalPayments];
-		
-		for(int paymentNumber =1; paymentNumber<= totalPayments; paymentNumber++)
-		{
-			// LoanSchedule currentLoanSchedule = new LoanSchedule();
-			
-			
-			insterestPaid = mpp *amount;
-			
-			principalPaid = getMonthlyPayment() - insterestPaid;
-			amount-=principalPaid;
-			remainingBalance = amount;
-			
-			
-			
-			loanScheduleTable[paymentNumber] = new LoanSchedule();
-			
-			loanScheduleTable[paymentNumber].setPaymentNumber(paymentNumber +1);
-			loanScheduleTable[paymentNumber].setInterestPaid(insterestPaid);
-			loanScheduleTable[paymentNumber].setPrincipalPaid(principalPaid);
-			loanScheduleTable[paymentNumber].setRemainingBalance(remainingBalance);
-			
-		
-		}
-		
-		return loanScheduleTable;
 	}
 	
 	public double monthlyPercentageRate()
@@ -87,53 +50,63 @@ public class Loan {
 	public void setAmortizationPeriod(int amortizationPeriod) {
 		this.amortizationPeriod = amortizationPeriod;
 	}
-//	public Loan() {
-//		super();
-//		// TODO Auto-generated constructor stub
-//		this.mortgageAmount=mortgageAmount;
-//		this.annualInterestRate=annualInterestRate;
-//		this.amortizationPeriod=amortizationPeriod;
-//		
-//	}
 
-//	@Override
-//	public String toString() {
-//		return "Loan [mortgageAmount=" + mortgageAmount + ", annualInterestRate=" + annualInterestRate
-//				+ ", amortizationPeriod=" + amortizationPeriod + "]";
-//	}
-//	
 	
-	
-	
-
 	public double getInterestPaid() 
 	{
 		return monthlyPercentageRate() * mortgageAmount;
 	}
+		
+					
+	public double getPrincipalPaid()
+	{
+		return getMonthlyPayment() - getInterestPaid();
+	}
 	
-	
-				
+	public LoanSchedule[] getLoanScheduleArray()
+	{
 		
 		
-		public double getPrincipalPaid()
+		int totalPayments = amortizationPeriod * 12;
+		double principalPaid = getPrincipalPaid();
+		double insterestPaid = getInterestPaid();
+		double amount = mortgageAmount;
+		double mpp = monthlyPercentageRate();
+		double remainingBalance = 0;
+		
+		LoanSchedule[] loanScheduleTable = new LoanSchedule[totalPayments];
+		
+		for(int paymentNumber = 1; paymentNumber< totalPayments; paymentNumber++)
 		{
-			return getMonthlyPayment() - getInterestPaid();
+			// LoanSchedule currentLoanSchedule = new LoanSchedule();
+			
+			
+			insterestPaid = mpp * amount;
+			
+			principalPaid = getMonthlyPayment() - insterestPaid;
+			amount-=principalPaid;
+			remainingBalance = amount;
+			
+			
+			
+			loanScheduleTable[paymentNumber] = new LoanSchedule();
+			
+			loanScheduleTable[paymentNumber].setPaymentNumber(paymentNumber +1);
+			loanScheduleTable[paymentNumber].setInterestPaid(insterestPaid);
+			loanScheduleTable[paymentNumber].setPrincipalPaid(principalPaid);
+			loanScheduleTable[paymentNumber].setRemainingBalance(remainingBalance);
+			
+		
 		}
 		
-		
+		return loanScheduleTable;
+	}
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+	@Override
+	public String toString() {
+		return "Loan [getLoanScheduleArray()=" + Arrays.toString(getLoanScheduleArray()) + "]";
+	}			
 		
 
 }
