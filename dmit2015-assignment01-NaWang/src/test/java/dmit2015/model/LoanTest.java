@@ -6,8 +6,7 @@ import org.junit.Test;
 
 public class LoanTest {
 
-	
-	  @Test
+	@Test
 	  public void testGetMonthyPayment()
 	  {
 		Loan loanBean = new Loan(250000, 5.29, 25);
@@ -198,7 +197,4 @@ public class LoanTest {
 		assertEquals(1474.86, loanSchedule240.getPrincipalPaid(), 0.00);
 		assertEquals(0.00, loanSchedule240.getRemainingBalance(), 0.00);
 	  }
-	  
-	}
-
-
+}

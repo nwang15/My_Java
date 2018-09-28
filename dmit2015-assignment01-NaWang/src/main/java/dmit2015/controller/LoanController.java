@@ -18,15 +18,18 @@ import org.primefaces.model.chart.ChartSeries;
 import dmit2015.model.Loan;
 import dmit2015.model.LoanSchedule;
 
+
+
 @Named("currentLoanController")
 @SessionScoped
 public class LoanController implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private Loan currentLoan = new Loan();
-	private BarChartModel loanChart; 
+	
 	private LoanSchedule[] currentLoanTable;
 	
+	private BarChartModel loanChart; 
 	
 	public void calculate(ActionEvent event)
 	{
@@ -59,7 +62,7 @@ public class LoanController implements Serializable
         //createBarModel();
         //createHorizontalBarModel();
         
-        loanChart.clear();
+		loanChart.clear();
         
         ChartSeries amountSeries = new ChartSeries();
         

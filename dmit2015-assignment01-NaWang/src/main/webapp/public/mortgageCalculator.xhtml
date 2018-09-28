@@ -20,7 +20,10 @@
 
 		<!-- Put your code for assignment 1 below here  -->
 
-  		<b:form>
+  		<h:form id="CalculatingForm">
+  		
+  		  <h1>Calculator</h1>
+  		  
 			<b:messages id="messages" />
 
 			<b:inputText id="mortgageAmount" label="Mortgage Amount"
@@ -76,14 +79,9 @@
 				</b:dataTableColumn>
 			</b:dataTable>
 			
-			<p:chart id="bar" type="bar" model="#{currentLoanController.loanChart}" style="height:300px"/>
+			 <p:chart id="bar" type="bar" model="#{currentLoanController.loanChart}" style="height:300px"/>
 			
-		</b:form>
-
-
-
-
-
+		</h:form>
 			
 	</ui:define>
 

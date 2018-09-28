@@ -8,30 +8,7 @@ public class Loan {
 	private double annualInterestRate;
 	private int amortizationPeriod;
 	
-	public Loan()
-	{
-		
-	}
-	
-	public Loan(double mortgageAmount, double annualInterestRate, int amortizationPeriod) {
-		super();
-		this.mortgageAmount = mortgageAmount;
-		this.annualInterestRate = annualInterestRate;
-		this.amortizationPeriod = amortizationPeriod;
-	}
-	
-	public double getMonthlyPayment()
-	{
-		return mortgageAmount*(Math.pow((1+annualInterestRate/200),(1.0/6.0))-1)
-				/(1-Math.pow(Math.pow((1+annualInterestRate/200),(1.0/6.0)), (-12*amortizationPeriod)));
-	}
-	
-	public double monthlyPercentageRate()
-	{
-		return Math.pow(((1+annualInterestRate)/200),1.0/6.0)-1;
-	}
-	
-	
+
 	public double getMortgageAmount() {
 		return mortgageAmount;
 	}
@@ -51,6 +28,31 @@ public class Loan {
 		this.amortizationPeriod = amortizationPeriod;
 	}
 
+	public Loan()
+	{
+		
+	}
+	
+	public Loan(double mortgageAmount, double annualInterestRate, int amortizationPeriod) {
+		super();
+		this.mortgageAmount = mortgageAmount;
+		this.annualInterestRate = annualInterestRate;
+		this.amortizationPeriod = amortizationPeriod;
+	}
+	
+	public double getMonthlyPayment()
+	{
+		return mortgageAmount * (Math.pow((1 + annualInterestRate / 200), (1.0 / 6.0)) - 1) / 
+				(1 - Math.pow(Math.pow((1 + annualInterestRate / 200), (1.0 / 6.0)), (-12 * amortizationPeriod)));
+	}
+	
+	public double monthlyPercentageRate()
+	{
+		return  Math.pow((1 + annualInterestRate / 200), (1.0 / 6.0)) - 1;
+	}
+	
+	
+	
 	
 	public double getInterestPaid() 
 	{
