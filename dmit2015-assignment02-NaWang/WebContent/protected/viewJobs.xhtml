@@ -26,13 +26,15 @@
 				action="jobDetail?faces-redirect=true">
 			</b:commandButton>
 				 <b:dataTable id="viewJObs"
-	            	value="#{currentTerritoryController.retreiveAllTerritories()}"
-	            	var="currentTerritory">
-	            	<b:dataTableColumn label="TerritoryID" value="#{currentTerritory.territoryID}"></b:dataTableColumn>
+	            	value="#{currentJobController.retreiveAllJobs()}"
+	            	var="currentTJob">
+	            	<b:dataTableColumn label="JobID" value="#{currentTerritory.territoryID}"></b:dataTableColumn>
 	            	
-	            	<b:dataTableColumn label="Territory Description" value="#{currentTerritory.territoryDescription}"></b:dataTableColumn>	
+	            	<b:dataTableColumn label="JobTitle" value="#{currentTerritory.territoryDescription}"></b:dataTableColumn>	
 	
-	            	<b:dataTableColumn label="Region" value="#{currentTerritory.region.regionDescription}"></b:dataTableColumn>	
+	            	<b:dataTableColumn label="Minimum Salary" value="#{currentTerritory.region.regionDescription}"></b:dataTableColumn>	
+	            	
+	            	<b:dataTableColumn label="Maximun Salary" value="#{currentTerritory.region.regionDescription}"></b:dataTableColumn>	
 	            	
 	            	<b:dataTableColumn label="Action">
 						<b:link outcome="territoryDetail"  icon-awesome="edit" icon-size="lg">
