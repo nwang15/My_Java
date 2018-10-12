@@ -27,18 +27,18 @@
 			</b:commandButton>
 				 <b:dataTable id="viewJObs"
 	            	value="#{currentJobController.retreiveAllJobs()}"
-	            	var="currentTJob">
-	            	<b:dataTableColumn label="JobID" value="#{currentTerritory.territoryID}"></b:dataTableColumn>
+	            	var="currentJob">
+	            	<b:dataTableColumn label="JobID" value="#{currentJob.jobId}"></b:dataTableColumn>
 	            	
-	            	<b:dataTableColumn label="JobTitle" value="#{currentTerritory.territoryDescription}"></b:dataTableColumn>	
+	            	<b:dataTableColumn label="JobTitle" value="#{currentJob.jobTitle}"></b:dataTableColumn>	
 	
-	            	<b:dataTableColumn label="Minimum Salary" value="#{currentTerritory.region.regionDescription}"></b:dataTableColumn>	
+	            	<b:dataTableColumn label="Minimum Salary" value="#{currentJob.minSalary}"></b:dataTableColumn>	
 	            	
-	            	<b:dataTableColumn label="Maximun Salary" value="#{currentTerritory.region.regionDescription}"></b:dataTableColumn>	
+	            	<b:dataTableColumn label="Maximun Salary" value="#{currentJob.maxSalary}"></b:dataTableColumn>	
 	            	
 	            	<b:dataTableColumn label="Action">
-						<b:link outcome="territoryDetail"  icon-awesome="edit" icon-size="lg">
-							<f:param name="id" value="#{currentTerritory.territoryID}" />
+						<b:link outcome="jobDetail"  icon-awesome="edit" icon-size="lg">
+							<f:param name="id" value="#{currentJob.jobId}" />
 							edit
 						</b:link>
 					</b:dataTableColumn>

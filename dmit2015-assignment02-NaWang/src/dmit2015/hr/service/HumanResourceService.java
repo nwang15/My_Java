@@ -26,16 +26,22 @@ public class HumanResourceService {
 	}
 	
 
-	public void deleteJob(Job existingJob) {
+	public void deleteJob(Job existingJob) throws Exception
+	{
 		existingJob = entityManager.merge(existingJob);
+		
+		if(existingJob.getEmployees().size()>0)
+		{
+			throw new Exception("This job with employees cannot be deleted");
+		}
 		entityManager.remove( existingJob );
 	}
 	
-	public void deleteJobById(String JobId) 
-	{
-		Job existingJob = findOneJob(JobId);
-		deleteJob(existingJob);
-	}
+//	public void deleteJobById(String JobId) 
+//	{
+//		Job existingJob = findOneJob(JobId);
+//		deleteJob(existingJob);
+//	}
 	
 	public Job findOneJob(String JobId) {
 		return entityManager.find(Job.class, JobId);	
@@ -43,20 +49,13 @@ public class HumanResourceService {
 	
 	public List<Job> findAllJob() {
 		return entityManager.createQuery(
-			"FROM Job",Job.class
+			"SELECT e FROM Job e ORDER BY e.jobTitle", Job.class
+//			"FROM Job",Job.class
 			).getResultList();
 	}
 	
-//	public void deleteJob(Job existingJob) throws Exception
-//	{
-//		existingJob = entityManager.merge(existingJob);
-//		if(existingJob == null)
-//		{
-//			throw new Exception("You are not allowed to delete this job");
-//		}
-//		
-//		entityManager.remove(existingJob);
-//	}
 	
+	
+
 	
 }

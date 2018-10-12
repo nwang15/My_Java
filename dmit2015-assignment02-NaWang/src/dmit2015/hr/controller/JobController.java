@@ -20,14 +20,41 @@ public class JobController {
 	private HumanResourceService humanResourceService;
 	
 	private Job jobDetail;
-	private String id;
+	private String Jobid;
+	private boolean editMode = false;
+	private String selectJobId;
 	
 	
-	
-
 	public List<Job> retreiveAllJobs()
 	{
 		return humanResourceService.findAllJob();
 	}
+	
+	
+	public Job getJobDetail() {
+		return jobDetail;
+	}
+	public void setJobDetail(Job jobDetail) {
+		this.jobDetail = jobDetail;
+	}
+	public String getJobid() {
+		return Jobid;
+	}
+	public void setJobid(String jobid) {
+		Jobid = jobid;
+	}
+	public boolean isEditMode() {
+		return editMode;
+	}
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
+	}
+	public String getSelectJobId() {
+		return selectJobId;
+	}
+	public void setSelectJobId(String selectJobId) {
+		this.selectJobId = selectJobId;
+	}
+	
 
 }
