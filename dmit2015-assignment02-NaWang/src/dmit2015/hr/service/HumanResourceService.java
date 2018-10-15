@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import dmit2015.hr.entity.Country;
 import dmit2015.hr.entity.Job;
 import dmit2015.hr.entity.Location;
 
@@ -60,7 +61,6 @@ public class HumanResourceService {
 	
 	
 	// Location
-	
 
 	public void addLocation (Location newLocation)
 	{
@@ -82,10 +82,26 @@ public class HumanResourceService {
 		entityManager.remove(existingLocation);
 	}
 	
+	public Location findOneLocation(int LocationId)
+	{
+		return entityManager.find(Location.class, LocationId);
+	}
+	public List<Location> findAllLocation()
+	{
+		return entityManager.createQuery(
+				"SELECT r FROM Location r ORDER By r.locationId", Location.class
+				).getResultList();
+	}
 	
-	
-	
-	
+	public Country findOneCountry(int CountryId)
+	{
+		return entityManager.find(Country.class,CountryId );
+	}
+	public List<Country> findAllCountries()
+	{
+		return entityManager.createQuery(
+				"FROM COUNTRY",Country.class).getResultList();
+	}
 	
 	
 	

@@ -31,8 +31,8 @@ public class LocationController implements Serializable {
 	
 	
 	
-	public List<Location> retreiveAllRegions() {
-		return humanResourceService.findAllRegion();
+	public List<Location> retreiveAllLocations() {
+		return humanResourceService.findAllLocation();
 	}
 	
 	
