@@ -86,6 +86,7 @@ public class HumanResourceService {
 	{
 		return entityManager.find(Location.class, LocationId);
 	}
+	
 	public List<Location> findAllLocation()
 	{
 		return entityManager.createQuery(
