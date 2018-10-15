@@ -6,12 +6,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import dmit2015.hr.entity.Job;
+import dmit2015.hr.entity.Location;
 
 public class HumanResourceService {
 
 	@Inject
 	private EntityManager entityManager;
-	
 	
 	// Jobs
 	public void addJob (Job newJob)
@@ -53,12 +53,41 @@ public class HumanResourceService {
 	public List<Job> findAllJob() {
 		return entityManager.createQuery(
 			"SELECT e FROM Job e ORDER BY e.jobTitle", Job.class
-//			"FROM Job",Job.class
 			).getResultList();
 	}
 	
 	
 	
+	
+	// Location
+	
 
+	public void addLocation (Location newLocation)
+	{
+		entityManager.persist(newLocation);
+	}
+	
+	public void updateLocation(Location existingLocation)
+	{
+		entityManager.merge(existingLocation);
+	}
+	public void deleteLocation(Location existingLocation) throws Exception
+	{
+		existingLocation = entityManager.merge(existingLocation);
+		if(existingLocation.getDepartments().size()>0)
+		{
+			throw new Exception("A location with department cannot deleted");
+		}
+		
+		entityManager.remove(existingLocation);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

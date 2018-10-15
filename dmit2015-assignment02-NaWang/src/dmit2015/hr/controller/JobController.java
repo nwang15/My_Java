@@ -139,6 +139,9 @@ public class JobController implements Serializable {
 	public List<Job> retreiveAllJobs() {
 		return humanResourceService.findAllJob();
 	}
+	
+	
+	
 	// getter and setter
 	public Job getJobDetail() {
 		return jobDetail;
