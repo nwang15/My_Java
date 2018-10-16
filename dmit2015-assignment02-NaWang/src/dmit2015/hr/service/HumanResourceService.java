@@ -82,7 +82,7 @@ public class HumanResourceService {
 		entityManager.remove(existingLocation);
 	}
 	
-	public Location findOneLocation(int LocationId)
+	public Location findOneLocation(Long LocationId)
 	{
 		return entityManager.find(Location.class, LocationId);
 	}
@@ -94,7 +94,8 @@ public class HumanResourceService {
 				).getResultList();
 	}
 	
-	public Country findOneCountry(int CountryId)
+	
+	public Country findOneCountry(String CountryId)
 	{
 		return entityManager.find(Country.class,CountryId );
 	}
