@@ -18,6 +18,98 @@
 			<h1>Job Details</h1>
 		</b:jumbotron>
 
+		<b:form>		
+			<b:inputText id="JobID" 
+				label="JobID" 
+				readonly="#{currentJobController.editMode ? 'true' : 'false'}"
+				value="#{currentJobController.jobDetail.jobId}"
+				placeholder="Enter jobID">
+			</b:inputText>
+	
+			<b:inputText id="jobTitle" 
+				label="Job Title"
+				value="#{currentJobController.jobDetail.jobTitle}"
+				placeholder="enter job title">
+			</b:inputText>
+	
+			<b:inputText id="maxSalary" 
+				label="Maximum Salary"
+				value="#{currentJobController.jobDetail.maxSalary}"
+				placeholder="enter maximum salary">
+			</b:inputText>
+			
+			<b:inputText id="minSalary" 
+				label="Minimum Salary"
+				value="#{currentJobController.jobDetail.minSalary}"
+				placeholder="enter minimum salary">
+			</b:inputText>
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="primary"
+				rendered="#{!currentJobController.editMode}"
+				action="#{currentJobController.createJob}">
+			</b:commandButton>
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="<b:messages id="messages" />
+
+		<b:form>		
+			<b:inputText id="JobID" 
+				label="JobID" 
+				readonly="#{currentJobController.editMode ? 'true' : 'false'}"
+				value="#{currentJobController.jobDetail.jobId}"
+				placeholder="Enter jobID">
+			</b:inputText>
+	
+			<b:inputText id="jobTitle" 
+				label="Job Title"
+				value="#{currentJobController.jobDetail.jobTitle}"
+				placeholder="enter job title">
+			</b:inputText>
+	
+			<b:inputText id="maxSalary" 
+				label="Maximum Salary"
+				value="#{currentJobController.jobDetail.maxSalary}"
+				placeholder="enter maximum salary">
+			</b:inputText>
+			
+			<b:inputText id="minSalary" 
+				label="Minimum Salary"
+				value="#{currentJobController.jobDetail.minSalary}"
+				placeholder="enter minimum salary">
+			</b:inputText>
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="primary"
+				rendered="#{!currentJobController.editMode}"
+				action="#{currentJobController.createJob}">
+			</b:commandButton>
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="success"
+				rendered="#{currentJobController.editMode}"
+				action="#{currentJobController.updateJob()}">
+			</b:commandButton>
+	
+			<b:commandButton value="Delete" 
+				look="danger"
+				icon-awesome="trash"
+				rendered="#{currentJobController.editMode}"
+				onclick="return confirm('Are you sure you want to delete this item?')"
+				action="#{currentJobController.removeJob()}">
+			</b:commandButton>
+	
+			<b:commandButton value="Cancel" 
+				icon-awesome="ban"
+				look="default"
+				immediate="true"
+				action="#{currentJobController.cancel()}">
+			</b:commandButton>
+		</b:form>
 
 
 

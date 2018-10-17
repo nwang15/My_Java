@@ -18,9 +18,81 @@
 			<h1>Location Details</h1>
 		</b:jumbotron>
 
+		<b:messages id="messages" />
+		
+		<b:form>
 
-
-
+			<b:inputText id="LocationID" 
+				label="LocationID" 
+				readonly="#{currentLocationController.editMode} ? 'true' : 'false'}"
+				rendered="#{currentLocationController.editMode != false}"
+				value="#{currentLocationController.locationDetail.locationId}"
+				placeholder="Enter locationID">
+			</b:inputText>
+			
+			<b:inputText id="streetAddress" 
+				label="Street Address *"
+				value="#{currentLocationController.locationDetail.streetAddress}"
+				placeholder="enter street address">
+			</b:inputText>
+	
+			<b:inputText id="postalCode" 
+				label="Postal Code"
+				value="#{currentLocationController.locationDetail.postalCode}"
+				placeholder="enter postal code">
+			</b:inputText>
+			
+			<b:inputText id="city" 
+				label="City *"
+				value="#{currentLocationController.locationDetail.city}"
+				placeholder="enter city">
+			</b:inputText>
+			
+			<b:inputText id="stateProvince" 
+				label="State/Province"
+				value="#{currentLocationController.locationDetail.stateProvince}"
+				placeholder="enter State or Province">
+			</b:inputText>
+			
+			<b:selectOneMenu id="countryId" value="#{currentLocationController.selectCountryId}"
+				label="Select location country">
+				<f:selectItem itemLabel="(Please select)" itemValue=""/>
+				<f:selectItems value="#{currentLocationController.retreiveAllCountry()}" 
+					var="country"
+					itemLabel="#{country.countryName}"
+					itemValue="#{country.countryId}" />
+			</b:selectOneMenu>
+			
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="primary"
+				rendered="#{!currentLocationController.editMode}"
+				action="#{currentLocationController.createLocation()}">
+			</b:commandButton>
+			
+			<b:commandButton value="Save" 
+				icon-awesome="save"
+				look="success"
+				rendered="#{currentLocationController.editMode}"
+				action="#{currentLocationController.updateLocation()}">
+			</b:commandButton>
+	
+			<b:commandButton value="Delete" 
+				look="danger"
+				icon-awesome="trash"
+				rendered="#{currentLocationController.editMode}"
+				onclick="return confirm('Are you sure you want to delete this item?')"
+				action="#{currentLocationController.removeLocation()}">
+			</b:commandButton>
+	
+			<b:commandButton value="Cancel" 
+				icon-awesome="ban"
+				look="default"
+				immediate="true"
+				action="#{currentLocationController.cancel()}">
+			</b:commandButton>
+		</b:form>
 
 
 	</ui:define>

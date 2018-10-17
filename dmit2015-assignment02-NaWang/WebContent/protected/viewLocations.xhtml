@@ -17,8 +17,38 @@
 		<b:jumbotron>
 			<h1>List of Locations</h1>
 		</b:jumbotron>
+		
+		<h:form >
+		
+			<b:message id="messages"></b:message>
+			<b:commandButton value="Create Location Detail Form" 
+				icon-awesome="link"
+				action="LocationDetail?faces-redirect=true">
+			</b:commandButton>
+			
+			<b:dataTable id="locations"
+						value="#{currentLocationController.retreiveAllLocations()}"
+						var="currentLocation">
+				<b:dataTableColumn label="LocationID" value="#{currentLocation.locationId}"></b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="Country" value="#{currentLocation.country.countryName}"></b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="Street Address" value="#{currentLocation.streetAddress}"></b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="City" value="#{currentLocation.city}"></b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="State/Province" value="#{currentLocation.stateProvince}"></b:dataTableColumn>	
 
-
+            	<b:dataTableColumn label="Postal Code" value="#{currentLocation.postalCode}"></b:dataTableColumn>	
+            	
+            	<b:dataTableColumn label="Action">
+					<b:link outcome="locationDetail"  icon-awesome="edit" icon-size="lg">
+						<f:param name="LOCAid" value="#{currentLocation.locationId}" />
+						edit
+					</b:link>
+			   </b:dataTableColumn>
+			</b:dataTable>
+ 		</h:form>
 
 
 
