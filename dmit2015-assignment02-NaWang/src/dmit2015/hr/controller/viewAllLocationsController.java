@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -21,23 +23,28 @@ public class viewAllLocationsController implements Serializable{
 	@Inject
 	private HumanResourceService humanResourceService;
 	
-	//private List<Location> locations;
+	private List<Location> locations;
 	
-//	@PostConstruct
-//	public void retreiveAllLocations()
-//	{
-//		locations = humanResourceService.findAllLocation();
+	@PostConstruct
+	public void retreiveAllLocations()
+	{
+		locations = humanResourceService.findAllLocation();
+	}
+	
+	@Produces
+	@Named	
+	public List<Location> getLocations()
+	{
+		return locations;
+	}
+	
+//    @PostConstruct
+//	public List<Location> retrieveAllLocation() {
+//		return humanResourceService.findAllLocation();
 //	}
-//	
-//	@Produces
-//	@Named	
-//	public List<Location> getLocations()
-//	{
-//		return locations;
-//	}
-//	
-	public List<Location> retrieveAllLocation() {
-		return humanResourceService.findAllLocation();
+	@PostConstruct
+	public void onLocationListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Location country) {
+		retreiveAllLocations();
 	}
 	
 	
