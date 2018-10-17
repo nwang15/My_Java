@@ -2,6 +2,9 @@ package dmit2015.hr.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.Length;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,9 +21,11 @@ public class Job implements Serializable {
 
 	@Id
 	@Column(name="JOB_ID")
+	@Length(max=9,message="Job ID must be less than 10 characters ")
 	private String jobId;
 
 	@Column(name="JOB_TITLE")
+	@Length(max=35, message = "Job Title must be less than 35 characters")
 	private String jobTitle;
 
 	@Column(name="MAX_SALARY")
