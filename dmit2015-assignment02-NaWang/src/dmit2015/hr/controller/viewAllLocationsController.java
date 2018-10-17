@@ -21,21 +21,21 @@ public class viewAllLocationsController implements Serializable{
 	@Inject
 	private HumanResourceService humanResourceService;
 	
-	private List<Location> locations;
+	//private List<Location> locations;
 	
-	@PostConstruct
-	public void retreiveAllLocations()
-	{
-		locations = humanResourceService.findAllLocation();
-	}
-	
-	@Produces
-	@Named	
-	public List<Location> getLocations()
-	{
-		return locations;
-	}
-	
+//	@PostConstruct
+//	public void retreiveAllLocations()
+//	{
+//		locations = humanResourceService.findAllLocation();
+//	}
+//	
+//	@Produces
+//	@Named	
+//	public List<Location> getLocations()
+//	{
+//		return locations;
+//	}
+//	
 	public List<Location> retrieveAllLocation() {
 		return humanResourceService.findAllLocation();
 	}
