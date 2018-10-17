@@ -16,7 +16,7 @@ import dmit2015.hr.service.HumanResourceService;
 
 @Named
 @ViewScoped
-public class viewAllLocationsController implements Serializable{
+public class ViewAllLocationsController implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

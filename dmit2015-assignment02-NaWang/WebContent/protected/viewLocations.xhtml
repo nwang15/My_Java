@@ -20,10 +20,10 @@
 		
 		<h:form >
 		
-			<b:message id="messages"></b:message>
+			<b:messages id="messages"></b:messages>
 			<b:commandButton value="Create Location Detail Form" 
 				icon-awesome="link"
-				action="LocationDetail?faces-redirect=true">
+				action="locationDetail?faces-redirect=true">
 			</b:commandButton>
 			
 			<b:dataTable id="locations"
@@ -43,7 +43,7 @@
             	
             	<b:dataTableColumn label="Action">
 					<b:link outcome="locationDetail"  icon-awesome="edit" icon-size="lg">
-						<f:param name="LOCAid" value="#{currentLocation.locationId}" />
+						<f:param name="id" value="#{currentLocation.locationId}" />
 						edit
 					</b:link>
 			   </b:dataTableColumn>

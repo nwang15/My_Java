@@ -14,54 +14,24 @@
 
 	<ui:define name="maincontent">
 
+	<f:metadata>
+		<f:viewParam name="id" value="#{currentJobController.jobid}" />
+		<f:event listener="#{currentJobController.findJobById()}" type="preRenderView"></f:event>
+	</f:metadata>
 		<b:jumbotron>
 			<h1>Job Details</h1>
 		</b:jumbotron>
 
-		<b:form>		
-			<b:inputText id="JobID" 
-				label="JobID" 
-				readonly="#{currentJobController.editMode ? 'true' : 'false'}"
-				value="#{currentJobController.jobDetail.jobId}"
-				placeholder="Enter jobID">
-			</b:inputText>
-	
-			<b:inputText id="jobTitle" 
-				label="Job Title"
-				value="#{currentJobController.jobDetail.jobTitle}"
-				placeholder="enter job title">
-			</b:inputText>
-	
-			<b:inputText id="maxSalary" 
-				label="Maximum Salary"
-				value="#{currentJobController.jobDetail.maxSalary}"
-				placeholder="enter maximum salary">
-			</b:inputText>
-			
-			<b:inputText id="minSalary" 
-				label="Minimum Salary"
-				value="#{currentJobController.jobDetail.minSalary}"
-				placeholder="enter minimum salary">
-			</b:inputText>
-			
-			<b:commandButton value="Save" 
-				icon-awesome="save"
-				look="primary"
-				rendered="#{!currentJobController.editMode}"
-				action="#{currentJobController.createJob}">
-			</b:commandButton>
-			
-			<b:commandButton value="Save" 
-				icon-awesome="save"
-				look="<b:messages id="messages" />
+		
 
 		<b:form>		
-			<b:inputText id="JobID" 
-				label="JobID" 
+			<b:inputText id="territoryId" 
+				label="TerritoryID" 
 				readonly="#{currentJobController.editMode ? 'true' : 'false'}"
 				value="#{currentJobController.jobDetail.jobId}"
-				placeholder="Enter jobID">
-			</b:inputText>
+				placeholder="Enter JobID">
+		</b:inputText>
+
 	
 			<b:inputText id="jobTitle" 
 				label="Job Title"
@@ -107,10 +77,9 @@
 				icon-awesome="ban"
 				look="default"
 				immediate="true"
-				action="#{currentJobController.cancel()}">
+				action="#{currentJobController.cancel()}">				
 			</b:commandButton>
 		</b:form>
-
 
 
 

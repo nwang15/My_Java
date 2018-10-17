@@ -14,21 +14,24 @@
 
 	<ui:define name="maincontent">
 
+		<f:metadata>
+			<f:viewParam name="id" value="#{currentLocationController.id}" />
+			<f:event listener="#{currentLocationController.findLocationById()}" type="preRenderView"></f:event>
+		</f:metadata>
+		
 		<b:jumbotron>
 			<h1>Location Details</h1>
 		</b:jumbotron>
 
 		<b:messages id="messages" />
 		
-		<b:form>
-
-			<b:inputText id="LocationID" 
+		<b:form>			
+			<b:inputText id="locationId" 
 				label="LocationID" 
-				readonly="#{currentLocationController.editMode} ? 'true' : 'false'}"
-				rendered="#{currentLocationController.editMode != false}"
+				readonly="#{currentLocationController.editMode ? 'true' : 'false'}"
 				value="#{currentLocationController.locationDetail.locationId}"
 				placeholder="Enter locationID">
-			</b:inputText>
+		 </b:inputText>
 			
 			<b:inputText id="streetAddress" 
 				label="Street Address *"
@@ -68,7 +71,7 @@
 				icon-awesome="save"
 				look="primary"
 				rendered="#{!currentLocationController.editMode}"
-				action="#{currentLocationController.createLocation()}">
+				action="#{currentLocationController.createLocation}">
 			</b:commandButton>
 			
 			<b:commandButton value="Save" 
@@ -83,7 +86,7 @@
 				icon-awesome="trash"
 				rendered="#{currentLocationController.editMode}"
 				onclick="return confirm('Are you sure you want to delete this item?')"
-				action="#{currentLocationController.removeLocation()}">
+				action="#{currentLocationController.remmoveLocation()}">
 			</b:commandButton>
 	
 			<b:commandButton value="Cancel" 

@@ -2,6 +2,7 @@ package dmit2015.hr.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -9,6 +10,7 @@ import dmit2015.hr.entity.Country;
 import dmit2015.hr.entity.Job;
 import dmit2015.hr.entity.Location;
 
+@Stateless
 public class HumanResourceService {
 
 	@Inject
@@ -102,7 +104,7 @@ public class HumanResourceService {
 	public List<Country> findAllCountries()
 	{
 		return entityManager.createQuery(
-				"FROM COUNTRY",Country.class).getResultList();
+				"FROM Country",Country.class).getResultList();
 	}
 	
 	
