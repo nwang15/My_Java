@@ -6,7 +6,7 @@
 	version="2.2"
 >
 	<persistence-unit name="primary">
-		<jta-data-source>java:jboss/datasources/oeDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/OracleOrderEntryDS</jta-data-source>
 		<class>dmit2015.oe.entity.Customer</class>
 		<class>dmit2015.oe.entity.Inventory</class>
 		<class>dmit2015.oe.entity.InventoryPK</class>
