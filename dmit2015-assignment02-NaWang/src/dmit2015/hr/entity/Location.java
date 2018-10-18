@@ -2,6 +2,7 @@ package dmit2015.hr.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -24,6 +25,7 @@ public class Location implements Serializable {
 	@Column(name="LOCATION_ID")
 	private long locationId;
 
+	@NotBlank(message="City value is required.")
 	@Length(max = 30,message="city length must be less than 30 charachers")
 	private String city;
 
@@ -35,7 +37,7 @@ public class Location implements Serializable {
 	private String stateProvince;
 
 	@Column(name="STREET_ADDRESS")
-	@Length(max = 30,message="street address length must be less than 30 charachers")
+	@Length(max = 30,message="street address length must be less than 40 charachers")
 	private String streetAddress;
 
 	//bi-directional many-to-one association to Department
@@ -44,6 +46,7 @@ public class Location implements Serializable {
 
 	//bi-directional many-to-one association to Country
 	@ManyToOne
+	@NotBlank(message="Country value is required.")
 	@JoinColumn(name="COUNTRY_ID")
 	private Country country;
 
