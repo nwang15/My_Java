@@ -1,12 +1,18 @@
 package dmit2015.oe.service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
+import org.omnifaces.util.Messages;
 
 import dmit2015.oe.entity.Category;
 import dmit2015.oe.entity.Customer;
@@ -29,19 +35,44 @@ public class OrderEntryService {
 	
 	public List<Order> findAllOrderByDateRange(Date startDate, Date endDate) {
 		// TODO: Complete the code for this method
+		 SimpleDateFormat pattern = new SimpleDateFormat ("yyyy-MM-dd");
+		 try
+		 {
+			 startDate = pattern.parse(pattern.format(startDate));
+			 Calendar newCalendar = Calendar.getInstance();
+			 newCalendar.set(Calendar.HOUR_OF_DAY,23);
+			 newCalendar.set(Calendar.MINUTE,59);
+			 endDate=newCalendar.getTime();
+		 }catch(ParseException e)
+		 {
+			 Messages.addGlobalError(e.getMessage());
+		 }
+		List<Order> orderList = new ArrayList<Order>();
+		try {
+			orderList = entityManager.createQuery(
+					"SELECT e FROM Order e WHERE e.orderDate BETWEEN :startDate And :endDate",
+					Order.class)
+					.setParameter("startDate", startDate)
+					.setParameter("endDate", endDate)
+					.getResultList();
+		}catch (Exception e) {
+			// TODO: handle exception
+			orderList = null;
+		}
 		
-		return null;
+		return orderList;
 	}
 		
 	public List<Order> findAllOrderByCustomerId(Long customerId) {
 		// TODO: Complete the code for this method
 		
-		return entityManager.createQuery("SELECT c FROM Customer c ORDER BY c.customerId"
-				,Customer.class)
-				.setParameter("customerId", customerId)
+		return entityManager.createQuery
+				("SELECT c FROM Order c WHERE c.Customer.customerId = :customerIdValue ", 
+				Order.class)
+				.setParameter("customerIdValue", customerId)
 				.getResultList();
-				}
-	
+				
+	}
 	
 	public Customer findOneCustomer(long customerId) {
 		// TODO: Complete the code for this method
@@ -52,7 +83,7 @@ public class OrderEntryService {
 	public Customer findOneCustomerByUniqueValue(String queryValue) { 
 		// TODO: Complete the code for this method
 		
-		return entityManager.find(Customer.class, queryValue);
+		return null;
 	}
 	
 	
