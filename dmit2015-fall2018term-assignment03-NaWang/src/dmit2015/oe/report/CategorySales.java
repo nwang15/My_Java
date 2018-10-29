@@ -25,4 +25,5 @@ public class CategorySales {
 		this.categoryName = categoryName;
 		this.categorySalesTotal = categorySalesTotal;
 	}
+	
 }
