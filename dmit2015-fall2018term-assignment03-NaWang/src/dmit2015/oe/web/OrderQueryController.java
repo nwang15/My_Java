@@ -114,7 +114,9 @@ public class OrderQueryController implements Serializable {
 	
 	public void findOrdersByCustomer() {
 		// TODO: Complete the code for this method
-		
+		try {
+			queryOrderResultList =oeService.findAllOrderByCustomerId();
+		}
 	}
 	
 	public void cancel() {
