@@ -36,8 +36,11 @@ public class OrderEntryService {
 	public List<Order> findAllOrderByCustomerId(Long customerId) {
 		// TODO: Complete the code for this method
 		
-		return null;
-	}
+		return entityManager.createQuery("SELECT c FROM Customer c ORDER BY c.customerId"
+				,Customer.class)
+				.setParameter("customerId", customerId)
+				.getResultList();
+				}
 	
 	
 	public Customer findOneCustomer(long customerId) {
@@ -49,7 +52,7 @@ public class OrderEntryService {
 	public Customer findOneCustomerByUniqueValue(String queryValue) { 
 		// TODO: Complete the code for this method
 		
-		return null;
+		return entityManager.find(Customer.class, queryValue);
 	}
 	
 	
@@ -62,7 +65,7 @@ public class OrderEntryService {
 	public ProductDescription findOneProductDescription(Long productId, String languageId) {
 		// TODO: Complete the code for this method
 		
-		return null;
+		return entityManager.find(ProductDescription.class, productId);
 	}
 	
 	public ProductInformation findOneProductInformation(long productId) {
