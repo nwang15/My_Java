@@ -94,7 +94,21 @@ public class OrderQueryController implements Serializable {
 	
 	public void findOrder() {
 		// TODO: Complete the code for this method
-		
+		try
+		{
+			queryOrderSingleResult = oeService.findOneOrder(queryOrderId);
+			
+			if(queryOrderSingleResult == null)
+			{
+				Messages.addGlobalWarn("Unknown orderId \"{0}\". We found 0 results", queryOrderId);
+			}
+			else {
+				Messages.addGlobalInfo("Found 1 result.");
+			}				
+		}
+			catch (Exception e) {
+			Messages.addGlobalError("Unable to perform search.");
+		}
 	}
 	
 	public void findOrder(Long orderId) {
@@ -114,9 +128,7 @@ public class OrderQueryController implements Serializable {
 	
 	public void findOrdersByCustomer() {
 		// TODO: Complete the code for this method
-		try {
-			queryOrderResultList =oeService.findAllOrderByCustomerId();
-		}
+		
 	}
 	
 	public void cancel() {

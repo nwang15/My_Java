@@ -1,3 +1,4 @@
+
 package dmit2015.oe.service;
 
 
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.omnifaces.util.Messages;
 
@@ -29,10 +31,22 @@ public class OrderEntryService {
 	private EntityManager entityManager;
 	
 	public Order findOneOrder(long orderId) {
-		// TODO: Complete the code for this method		
-		return entityManager.find(Order.class, orderId);
-	}
-	
+		// TODO: Complete the code for this method	
+		Order querySingleResult = null;
+		try {					
+			querySingleResult = entityManager.createQuery
+				("SELECT o FROM Order o JOIN FETCH o.orderItems WHERE o.orderId = :idValue",
+				Order.class)
+				.setParameter("idValue", orderId)
+				.getSingleResult();
+		}catch(NoResultException e)
+		{
+			querySingleResult = null;
+		}
+		return querySingleResult;
+				
+//		entityManager.find(Order.class , orderId);
+	}		
 	public List<Order> findAllOrderByDateRange(Date startDate, Date endDate) {
 		// TODO: Complete the code for this method
 		 SimpleDateFormat pattern = new SimpleDateFormat ("yyyy-MM-dd");
