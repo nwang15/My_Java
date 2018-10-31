@@ -104,7 +104,9 @@
 			<tbody>
 				<c:forEach var="item" items="#{orderQueryController.queryOrderSingleResult.orderItems}">
 					<tr>
-						<td>#{item.productInformation.productName}</td>
+						<td>#{item.productInformation.productName}
+						    
+						</td>
 						<td class="text-right">
 							<h:outputText value="#{item.unitPrice}">
 								<f:convertNumber type="currency"/>

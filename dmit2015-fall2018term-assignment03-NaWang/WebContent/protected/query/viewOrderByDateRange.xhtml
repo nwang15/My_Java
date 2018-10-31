@@ -39,7 +39,7 @@
 				label="End Date"
 				showButtonPanel="true"
 				changeMonth="true"
-				changeYear="true">
+				changeYear="true">f
 			</b:datepicker>
 		
 			<b:commandButton value="Search"
@@ -61,7 +61,34 @@
 			
 				<b:panel title="Orders by Date Range" rendered="#{(orderQueryController.queryOrderResultList != null) and (orderQueryController.queryOrderSingleResult == null)}">
 				
-					
+				<b:dataTable id="Order by Date Range"
+				value="#{currentLoanController.currentLoan.loanScheduleArray}"
+				var="currentTransaction">
+				<b:dataTableColumn label="Payment Number">
+					<h:outputText value="#{currentTransaction.paymentNumber}">
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Payment">
+					<h:outputText value="#{currentLoanController.currentLoan.monthlyPayment}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Interest">
+					<h:outputText value="#{currentTransaction.interestPaid}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Principal">
+					<h:outputText value="#{currentTransaction.principalPaid}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Balance">
+					<h:outputText value="#{currentTransaction.remainingBalance}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+			</b:dataTable>
 				</b:panel>
 			</p:outputPanel>
 					
