@@ -118,7 +118,20 @@ public class OrderQueryController implements Serializable {
 	
 	public void findOrdersByDateRange() {
 		// TODO: Complete the code for this method
+		try {
+			
 		
+		queryOrderResultList = oeService.findAllOrderByDateRange(queryStartDate, queryEndDate);
+		if(queryOrderResultList == null ||queryOrderResultList.size()== 0)
+		{
+			Messages.addGlobalWarn("Unknown date \"{0}{1}\". We found 0 results", queryStartDate,queryEndDate);
+			
+		} else {
+			Messages.addGlobalInfo("Found {0} result(s).", queryOrderResultList.size());
+		}
+		}catch (Exception e) {
+			Messages.addGlobalError("search findOrderByDateRange failed.");
+		}
 	}
 	
 	public void findCustomer() {
