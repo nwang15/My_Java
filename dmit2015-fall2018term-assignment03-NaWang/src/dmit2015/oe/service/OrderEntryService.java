@@ -96,8 +96,21 @@ public class OrderEntryService {
 	
 	public Customer findOneCustomerByUniqueValue(String queryValue) { 
 		// TODO: Complete the code for this method
+		Customer querySingleResult = null;
 		
-		return null;
+		try
+		{
+			//long custmerId = long.parseLong(queryValue);
+			long customerId = Long.parseLong(queryValue);
+			querySingleResult = findOneCustomer(customerId)
+					
+		}catch(Exception e)
+		{
+			querySingleResult = (Customer)entityManager.createNativeQuery("")
+		}
+		
+		
+		return querySingleResult;
 	}
 	
 	
