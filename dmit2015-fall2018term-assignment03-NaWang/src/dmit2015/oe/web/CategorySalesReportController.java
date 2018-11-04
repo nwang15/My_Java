@@ -75,7 +75,11 @@ public class CategorySalesReportController implements Serializable {
 			oeService.findOneCategory(selectedCategoryId).getCategoryName();
 		}else
 		{
-			
+			categorySales = oeService.findCategorSalesForParentCategoryIdAndYear(parentCategoryId, selectedYear);
+			reportTitle = "Year"
+						+ selectedYear
+						+"CATEGORIES"
+						+ oeService.findOneCategory(selectedCategoryId).getCategoryName();
 		}
 		
 		

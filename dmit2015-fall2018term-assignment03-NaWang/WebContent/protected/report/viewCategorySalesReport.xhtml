@@ -24,7 +24,17 @@
 		
 		<b:form>	
 
-
+			<p:outputLabel for="parentCategoryId" value="Report parentCategoryId:" />
+			
+			<h:selectOneMenu id="parentCategoryId" value="#{currentCSRController.selectedParentCategoryId}" 
+  				styleClass="form-control"
+				label="Repot selectedParentCategoryId" >
+				<p:ajax event="change" update="reportOutputPanel" listener="#{currentCSRController.createReport()}" />
+				<f:selectItem itemLabel="Online Catalog" itemValue="90" />
+				<f:selectItems value="#{currentCSRController.retreiveparentCategory()}" var="parentCategoryId"
+					itemLabel="#{parentCategoryId.categoryName}"
+					itemValue="#{parentCategoryId.categoryId}" />
+  			</h:selectOneMenu>
 
 		</b:form>
 
