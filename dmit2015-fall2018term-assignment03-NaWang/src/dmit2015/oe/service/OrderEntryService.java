@@ -102,11 +102,16 @@ public class OrderEntryService {
 		{
 			//long custmerId = long.parseLong(queryValue);
 			long customerId = Long.parseLong(queryValue);
-			querySingleResult = findOneCustomer(customerId)
+			querySingleResult = findOneCustomer(customerId);
 					
 		}catch(Exception e)
 		{
-			querySingleResult = (Customer)entityManager.createNativeQuery("")
+			querySingleResult = (Customer)entityManager.createNativeQuery(
+					"SELECT * FROM CUSTOMER c, TABLE(c.PHONE_NUMBERS) p "
+					+ "WHERE c.CU_EMAIL = :emailQueryValue "
+					+ "OR p.COLUMN_Value = :emailQueryValue",Customer.class)
+					.setParameter("emailQueryValue", queryValue)
+					.getSingleResult();
 		}
 		
 		
@@ -116,14 +121,40 @@ public class OrderEntryService {
 	
 	public List<ProductInformation> findAllProductInformationByPattern(String pattern) {
 		// TODO: Complete the code for this method
-		
-		return null;
+		List<ProductInformation> resultList = null;
+		try
+		{
+			resultList = entityManager.createQuery
+					("SELECT p FROM ProductInformation p"
+					+ "WHERE p.productName LIKE :pattern", ProductInformation.class)
+					.setMaxResults(30)
+					.setParameter("pattern", "%"+pattern+"%")
+					.getResultList();
+		}catch (NoResultException e) {
+			resultList = null;
+		}
+				
+		return resultList;
 	}
 	
 	public ProductDescription findOneProductDescription(Long productId, String languageId) {
 		// TODO: Complete the code for this method
+		ProductDescription querySingleResult = null;
+		try
+		{
+			querySingleResult = entityManager.createQuery(
+					"SELECT p FROM ProductInformation p"
+					+"WHERE p.id.productId = :productId AND"
+					+"p.id.languageId = :languageId",ProductDescription.class)
+					.setParameter("productId", productId)
+					.setParameter("languageId", languageId)
+					.getSingleResult();
+		}catch(NoResultException e) {
+			querySingleResult = null;
+		}
+		return querySingleResult;
 		
-		return entityManager.find(ProductDescription.class, productId);
+		
 	}
 	
 	public ProductInformation findOneProductInformation(long productId) {

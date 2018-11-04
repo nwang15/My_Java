@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -136,6 +137,21 @@ public class OrderQueryController implements Serializable {
 	
 	public void findCustomer() {
 		// TODO: Complete the code for this method
+		try
+		{
+			queryOrderResultList = new ArrayList<Order>();
+			queryOrderResultList = oeService.findAllOrderByCustomerId(queryCustomerSingleResult.getCustomerId());
+			if(queryOrderResultList == null || queryOrderResultList.size() ==0)
+			{
+				Messages.addGlobalWarn("Unknown Customer ID \"{0}\". We found 0 results", queryOrderId);
+				
+			}else
+			{
+				Messages.addGlobalInfo("Found {0} result(s).", queryOrderResultList.size());
+			}
+		}catch (Exception e) {
+			Messages.addGlobalError("search findOrderByDateRange failed.");
+		}
 		
 	}
 	

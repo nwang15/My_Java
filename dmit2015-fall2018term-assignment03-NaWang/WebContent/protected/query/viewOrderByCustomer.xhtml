@@ -56,32 +56,194 @@
 			
 			<p:outputPanel id="queryCustomerSingleResultPanel" >
 				<b:panel title="Customer Detail" rendered="#{(orderQueryController.queryCustomerSingleResult != null) and (orderQueryController.queryOrderResultList == null)}">
+				
+					<h:outputLabel value="CustomerId" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.customerId}" />
 					
+					<h:outputLabel value="First Name" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custFirstName}" />
 					
+					<h:outputLabel value="Last Name" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custLastName}" />
+					
+					<h:outputLabel value="Street Address" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custAddress.streetAddress}" />
+					
+					<h:outputLabel value="City" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custAddress.city}" />
+
+					<h:outputLabel value="State/Province" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custAddress.stateProvince}" />
+					
+					<h:outputLabel value="Postal Code" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custAddress.postalCode}" />
+					
+					<h:outputLabel value="Phone Number" />
+					<h:panelGroup>
+						<p:repeat var="phone" value="#{orderQueryController.queryCustomerSingleResult.phoneNumbers}">
+							<h:outputText value="#{phone}" /> <br />						
+						</p:repeat>
+					</h:panelGroup>
+					
+					<h:outputLabel value="NLS Language" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.nlsLanguage}" />
+					
+					<h:outputLabel value="NLS Territory" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.nlsTerritory}" />
+					
+					<h:outputLabel value="Credit Limit" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.creditLimit}" />
+					
+					<h:outputLabel value="Email" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.custEmail}" />
+					
+					<h:outputLabel value="Account Manager" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.accountManager.firstName} #{orderQueryController.queryCustomerSingleResult.accountManager.lastName}" />
+					
+					<h:outputLabel value="Date of Birth" />
+					<h:outputText value="#{of:formatDate(orderQueryController.queryCustomerSingleResult.dateOfBirth,'MM dd, yyyy')}" />
+					
+					<h:outputLabel value="Martial Status" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.maritalStatus}" />	
+					
+					<h:outputLabel value="Gender" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.gender}" />		
+					
+					<h:outputLabel value="Income Level" />
+					<h:outputText value="#{orderQueryController.queryCustomerSingleResult.incomeLevel}" />
 				</b:panel>
 
-				<b:commandButton value="View Customer Orders"
-					rendered="#{(orderQueryController.queryCustomerSingleResult != null) and (orderQueryController.queryOrderResultList == null)}"
-					look="info"
-					ajax="true"
-					update="queryCustomerSingleResultPanel queryForm:queryResultListPanel queryForm:querySingleResultPanel messages"
-					actionListener="#{orderQueryController.findOrdersByCustomer()}">
-				</b:commandButton>	
+					<b:commandButton value="View Customer Orders"
+						rendered="#{(orderQueryController.queryCustomerSingleResult != null) and (orderQueryController.queryOrderResultList == null)}"
+						look="info"
+						ajax="true"
+						update="queryCustomerSingleResultPanel queryForm:queryResultListPanel queryForm:querySingleResultPanel messages"
+						actionListener="#{orderQueryController.findOrdersByCustomer()}">
+					</b:commandButton>	
 				
 			</p:outputPanel>
 			
 			<p:outputPanel id="queryResultListPanel">
 			
 				<b:panel title="Customer Orders" rendered="#{(orderQueryController.queryOrderResultList != null) and (orderQueryController.queryOrderSingleResult == null)}">
-				
-
+					
+					<b:dataTable value="#{currentOQC.queryResultListOrder}" var="currentOL" page-length="5" pageLengthMenu="5,10,15,20">
+						<b:dataTableColumn label="OrderId" value="#{currentOL.orderId}"/>
+						<b:dataTableColumn label="Product ID" value="#{currentOL.orderDate}"/>
+						
+						<b:dataTableColumn label="Order Total">
+							<h:outputText value="#{currentOL.orderTotal}">
+								<f:convertNumber type="currency" currencySymbol="$"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn label="Order Mode" value="#{currentOL.orderMode}"/>
+						
+						<b:dataTableColumn label="Order Status" value="#{currentOL.orderStatus}"/>
+						
+						<b:dataTableColumn label="Customer Name" value="#{currentOL.customer.custFirstName} #{currentOL.customer.custLastName}"/>
+						
+						<b:dataTableColumn label="Sales Rep" value="#{currentOL.salesRep.firstName} #{currentOL.salesRep.lastName}"/>										
+						
+						<b:dataTableColumn label="Action">
+							<f:facet name="header">
+									Action
+								</f:facet>
+								<b:commandButton value="view details" 
+									look="link"
+									actionListener="#{currentOQC.findOrderByOrderId(currentOL.orderId)}"
+									ajax="true" update="queryForm:querySingleResult queryForm:queryResultList">
+								</b:commandButton>
+						</b:dataTableColumn>					
+					</b:dataTable>		
 				</b:panel>
 			</p:outputPanel>
 			
 			<p:outputPanel id="querySingleResultPanel">
 			
 				<b:panel title="Order Details" rendered="#{not empty orderQueryController.queryOrderSingleResult}">
-
+					<b:row>
+						<b:column span="6">
+							<b:panel title="Customer Details" collapsible="false" style="height: 250px">
+								<strong>
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.custFirstName} #{currentOQC.querySingleResultOrder.customer.custLastName}" /> <br />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.custAddress.streetAddress}" /> <br />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.custAddress.city}, #{currentOQC.querySingleResultOrder.customer.custAddress.stateProvince}  #{currentOQC.querySingleResultOrder.customer.custAddress.postalCode}" /> <br />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.custAddress.countryId}" /> <br />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.phoneNumbers[0]}" /> <br />
+								</strong>
+							</b:panel>
+						</b:column>
+						<b:column span="6">						
+							<b:panel title="Order Details" collapsible="false" style="height: 250px">
+								<b:panelGrid colSpans="4,8">
+									<h:outputLabel value="CustomerID" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.customer.customerId}" />		
+									
+									<h:outputLabel value="OrderID" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.orderId}" />		
+									
+									<h:outputLabel value="Order Date" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.orderDate}">
+										<f:convertDateTime pattern="MMMM d, yyyy"/>
+									</h:outputText>			
+	
+									<h:outputLabel value="Order Mode" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.orderMode}" />		
+																	
+									<h:outputLabel value="Order Status" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.orderStatus}" />		
+																	
+									<h:outputLabel value="Sales Rep" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.salesRep.firstName} #{currentOQC.querySingleResultOrder.salesRep.lastName}" />	
+	
+									<h:outputLabel value="Sales Total" />
+									<h:outputText value="#{currentOQC.querySingleResultOrder.orderTotal}">
+										<f:convertNumber type="currency"/>
+									</h:outputText>													 
+								</b:panelGrid>													
+							</b:panel>
+						</b:column>
+					</b:row>			
+					<p:outputPanel rendered="true">					
+						<table class="table table-bordered table-striped">
+							<thead class="thead-inverse">
+								<tr>
+									<th>Item</th>
+									<th class="text-right">Price</th>
+									<th class="text-right">Qty</th>
+									<th class="text-right">Sub Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<p:repeat var="item" value="#{currentOQC.querySingleResultOrder.orderItems}">
+									<tr>
+										
+										<td><h:outputText style="font-weight:bold" value="#{item.productInformation.productName}" />
+											<br /> 
+											<h:outputText value="Item# " />
+											<h:outputText value="#{item.productInformation.productId}" />
+										
+										</td>				
+										
+										<td class="text-right">
+											<h:outputText value="#{item.unitPrice}">
+												<f:convertNumber type="currency"/>
+											</h:outputText>
+										</td>
+										<td class="text-right"><h:outputText value="#{item.quantity}" /></td>
+										<td class="text-right">
+											<h:outputText value="#{item.unitPrice * item.quantity}">
+												<f:convertNumber type="currency"/>
+											</h:outputText>
+										</td>
+									</tr>
+								</p:repeat>
+							</tbody>
+							
+						</table>
+					</p:outputPanel>
+						
 						
 				</b:panel>
 			
