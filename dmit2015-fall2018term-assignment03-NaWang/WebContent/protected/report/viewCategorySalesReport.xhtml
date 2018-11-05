@@ -26,19 +26,42 @@
 
 			<p:outputLabel for="parentCategoryId" value="Report parentCategoryId:" />
 			
-			<h:selectOneMenu id="parentCategoryId" value="#{currentCSRController.selectedParentCategoryId}" 
+			<h:selectOneMenu id="parentCategoryId" value="#{categorySalesReportController.selectedCategoryId}" 
   				styleClass="form-control"
 				label="Repot selectedParentCategoryId" >
-				<p:ajax event="change" update="reportOutputPanel" listener="#{currentCSRController.createReport()}" />
-				<f:selectItem itemLabel="Online Catalog" itemValue="90" />
-				<f:selectItems value="#{currentCSRController.retreiveparentCategory()}" var="parentCategoryId"
+				<p:ajax event="change" update="reportOutputPanel" listener="#{categorySalesReportController.generateReport()}" />
+				<f:selectItem itemLabel="Online Catalog" itemValue="90L" />
+				<f:selectItems value="#{categorySalesReportController.retreiveOnlineCatalogCategories()}" var="parentCategoryId"
 					itemLabel="#{parentCategoryId.categoryName}"
 					itemValue="#{parentCategoryId.categoryId}" />
   			</h:selectOneMenu>
   			
   			<p:outputLabel for="year" value="Report Year:" />
   			
+  				
+  			<h:selectOneMenu id="year" value="#{categorySalesReportController.selectedYear}" 
+  				styleClass="form-control"
+				label="Report Year" >
+				<p:ajax event="change" update="reportOutputPanel" listener="#{categorySalesReportController.generateReport()}" />
+				<f:selectItem itemLabel="All Years" itemValue="" />
+				<f:selectItems value="#{categorySalesReportController.retreiveYearsWithOrders()}" var="year"
+					itemLabel="#{year}"
+					itemValue="#{year}" />
+  			</h:selectOneMenu> 
   			
+  			<p:outputPanel id="reportOutputPanel">
+								
+				<hf:chart id="barchart" type="bar" title="#{categorySalesReportController.reportTitle}"
+					height="800px"
+					yaxisLabel="Sales Total" xaxisLabel="Category Name" >
+					<hf:chartSerie name="Category Sales" 
+						value="#{categorySalesReportController.categorySales}" var="point" 
+						point="#{point.categorySalesTotal}" 
+						tickLabel="#{point.categoryName}" 		
+						dataLabel="{point.y}"	
+						colorByPoint="true" />
+				</hf:chart>				
+			</p:outputPanel>
 
 		</b:form>
 

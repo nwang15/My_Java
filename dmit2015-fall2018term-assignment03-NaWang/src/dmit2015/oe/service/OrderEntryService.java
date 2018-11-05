@@ -237,19 +237,26 @@ public class OrderEntryService {
 	
 	public List<CategorySales> findCategorSalesForParentCategoryIdAndYear(Long parentCategoryId, Integer year) {
 		// TODO: Complete the code for this method
-		if(parentCategoryId == 90L)
+		if(parentCategoryId != null && parentCategoryId == 90)
 		{
 			return entityManager.createQuery("SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity))"
 					+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "		
 					+ " WHERE c.parentCategory.categoryId IN (10,20,30) AND YEAR(o.orderDate) = :yearValue "
-					+ " GROUP BY c.categoryName", CategorySales.class).setParameter("yearValue", year).getResultList();
+					+ " GROUP BY c.categoryName", 
+					CategorySales.class)
+					.setParameter("yearValue", year)
+					.getResultList();
 		} else 
 		{
-			return entityManager.createQuery("SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity)) "
+			return entityManager.createQuery(
+					"SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity)) "
 						+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "		
 						+ " WHERE c.parentCategory.categoryId = :checkId AND YEAR(o.orderDate) = :yearValue "
-						+ " GROUP BY c.categoryName", CategorySales.class).setParameter("checkId", parentCategoryId)
-					    .setParameter("yearValue", year).getResultList();
+						+ " GROUP BY c.categoryName", 
+						CategorySales.class)
+						.setParameter("checkId", parentCategoryId)
+					    .setParameter("yearValue", year)
+					    .getResultList();
 		}
 		
 	}

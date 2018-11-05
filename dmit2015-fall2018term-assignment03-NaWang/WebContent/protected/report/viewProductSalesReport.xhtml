@@ -25,9 +25,54 @@
 		<b:messages id="messages" />
 		
 		<b:form>	
+		<p:outputLabel for="maxResults" value="Max Results:" />
 		
-
+			<h:selectOneRadio id="maxResults" value="#{productSalesReportController.maxResult}">
+				<p:ajax event="change" update="reportOutputPanel" listener="#{productSalesReportController.generateReport()}" />
+			   	<f:selectItem itemValue="5" itemLabel="5" selected="true"/>
+			   	<f:selectItem itemValue="10" itemLabel="10" />
+			   	<f:selectItem itemValue="15" itemLabel="15" />
+			   	<f:selectItem itemValue="20" itemLabel="20" />
+			</h:selectOneRadio>	
 		
+			<p:outputLabel for="year" value="Report Year:" />
+			
+			<h:selectOneMenu id="year" value="#{productSalesReportController.selectedYear}" 
+  				styleClass="form-control"
+				label="Report Year" >
+				<p:ajax event="change" update="reportOutputPanel" listener="#{productSalesReportController.generateReport()}" />
+				<f:selectItem itemLabel="All Years" itemValue="" />
+				<f:selectItems value="#{productSalesReportController.retreiveYearsWithOrders()}" var="year"
+					itemLabel="#{year}"
+					itemValue="#{year}" />
+  			</h:selectOneMenu>
+  			
+  			<p:outputPanel id="reportOutputPanel">
+			
+				<b:dataTable value="#{productSalesReportController.productSales}" var="currentPDS" page-length="5" pageLengthMenu="5,10,15,20"
+				columnVisibility="true"
+				copy="true"
+				csv="true"
+				excel="true"
+				pdf="true"
+				print="true">
+					<b:dataTableColumn label="Category Name" value="#{currentPDS.categoryName}"/>
+					<b:dataTableColumn label="Product ID" value="#{currentPDS.productId}"/>
+					<b:dataTableColumn label="Product Name" value="#{currentPDS.productName}"/>
+					<b:dataTableColumn label="Total Sales">
+						<h:outputText value="#{currentPDS.productSalesTotal}">
+							<f:convertNumber type="currency" currencySymbol="$"/>
+						</h:outputText>
+					</b:dataTableColumn>
+					<b:dataTableColumn label="Total Quantity" value="#{currentPDS.quantityCount}"/>
+				</b:dataTable>
+	
+			</p:outputPanel>
+  			
+  			
+  			
+  			
+  			
 		</b:form>
 
 	</ui:define>

@@ -25,7 +25,7 @@ public class CategorySalesReportController implements Serializable {
 	private Integer selectedYear;
 	private Long selectedCategoryId = 90L;
 
-	private Long parentCategoryId;
+	
 	
 
 	public List<CategorySales> getCategorySales() {
@@ -75,7 +75,7 @@ public class CategorySalesReportController implements Serializable {
 			oeService.findOneCategory(selectedCategoryId).getCategoryName();
 		}else
 		{
-			categorySales = oeService.findCategorSalesForParentCategoryIdAndYear(parentCategoryId, selectedYear);
+			categorySales = oeService.findCategorSalesForParentCategoryIdAndYear(selectedCategoryId, selectedYear);
 			reportTitle = "Year"
 						+ selectedYear
 						+"CATEGORIES"
