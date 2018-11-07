@@ -220,7 +220,8 @@ public class OrderEntryService {
 					"SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity)) "
 						+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c "		
 						+ " WHERE c.parentCategory.categoryId IN (10,20,30) "
-						+ " GROUP BY c.categoryName",
+						+ " GROUP BY c.categoryName"
+						+ " ORDER BY c.categoryName",
 					CategorySales.class)				
 					.getResultList();			
 		} else {
@@ -228,7 +229,8 @@ public class OrderEntryService {
 					"SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity)) "
 						+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c "		
 						+ " WHERE c.parentCategory.categoryId = :checkId "
-						+ " GROUP BY c.categoryName",					
+						+ " GROUP BY c.categoryName"
+						+ " ORDER BY c.categoryName",
 					CategorySales.class)
 					.setParameter("checkId",parentCategoryId)
 					.getResultList();
@@ -242,7 +244,8 @@ public class OrderEntryService {
 			return entityManager.createQuery("SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity))"
 					+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "		
 					+ " WHERE c.parentCategory.categoryId IN (10,20,30) AND YEAR(o.orderDate) = :yearValue "
-					+ " GROUP BY c.categoryName", 
+					+ " GROUP BY c.categoryName"
+					+ " ORDER BY c.categoryName",
 					CategorySales.class)
 					.setParameter("yearValue", year)
 					.getResultList();
@@ -252,7 +255,8 @@ public class OrderEntryService {
 					"SELECT new dmit2015.oe.report.CategorySales(c.categoryName, SUM(oi.unitPrice * oi.quantity)) "
 						+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "		
 						+ " WHERE c.parentCategory.categoryId = :checkId AND YEAR(o.orderDate) = :yearValue "
-						+ " GROUP BY c.categoryName", 
+						+ " GROUP BY c.categoryName"
+						+ " ORDER BY c.categoryName",
 						CategorySales.class)
 						.setParameter("checkId", parentCategoryId)
 					    .setParameter("yearValue", year)
@@ -269,7 +273,7 @@ public class OrderEntryService {
 				+"(pi.productName, SUM(oi.unitPrice * oi.quantity), c.categoryName, SUM(oi.quantity), pi.productId) "
 				+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "	
 				+ " GROUP BY pi.productName,c.categoryName, pi.productId "
-				+ " ORDER BY SUM(oi.unitPrice * oi.quantity) DESC, SUM(oi.quantity) DESC",
+				+ " ORDER BY SUM(oi.unitPrice * oi.quantity) DESC",
 				ProductSales.class).setMaxResults(maxResult).getResultList();
 	}
 	
@@ -281,7 +285,7 @@ public class OrderEntryService {
 				+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c, IN (oi.order) o "		
 				+ " WHERE YEAR(o.orderDate) = :yearValue "
 				+ " GROUP BY pi.productName,c.categoryName, pi.productId "
-				+ " ORDER BY SUM(oi.unitPrice * oi.quantity) DESC, SUM(oi.quantity) DESC",
+				+ " ORDER BY SUM(oi.unitPrice * oi.quantity)",
 				ProductSales.class).setParameter("yearValue", year).setMaxResults(maxResult).getResultList();
 	}
 	

@@ -121,7 +121,7 @@ public class OrderQueryController implements Serializable {
 		// TODO: Complete the code for this method
 		try {
 			
-		
+		queryOrderResultList=null;
 		queryOrderResultList = oeService.findAllOrderByDateRange(queryStartDate, queryEndDate);
 		if(queryOrderResultList == null ||queryOrderResultList.size()== 0)
 		{
