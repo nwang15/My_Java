@@ -1,3 +1,4 @@
+
 package dmit2015.hr.controller;
 
 import java.io.Serializable;
@@ -94,10 +95,8 @@ public class JobController implements Serializable {
 			1.25 * jobDetail.getMinSalary().doubleValue())
 			{
 				humanResourceService.updateJob(jobDetail);
-				
 				jobDetail = new Job();
 				Messages.addFlashGlobalInfo("Update was successful.");
-				editMode = false;
 				outcome = "viewJobs?faces-redirect=true";
 			}
 		}catch(EJBAccessException e)
@@ -174,3 +173,4 @@ public class JobController implements Serializable {
 
 
 }
+
