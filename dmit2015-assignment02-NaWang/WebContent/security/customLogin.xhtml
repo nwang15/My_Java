@@ -28,7 +28,8 @@
 		
 			<b:messages id="messages" />
 			
-			<b:form name="loginForm">
+			<b:form action="#{request.contextPath}/j_security_check" method="post" class="form-signin" name="loginForm">
+        
 	            <h2 class="form-signin-heading">Please sign in</h2>
 	            <b:inputText id="username" label="User Name" placeholder="username" 
 	            	value="#{loginController.username}">
@@ -42,7 +43,7 @@
 	                    <b:iconAwesome name="key" />
 	                </f:facet>
 	            </b:inputSecret>
-	            <b:commandButton value="Login" action="#{loginController.login()}"  icon="log-in" />
+	            <h:commandButton styleClass="btn btn-primary btn-block" value="Sign In" icon="log-in" size="lg" type="submit"/>
 	        </b:form>
 		</div>
 
