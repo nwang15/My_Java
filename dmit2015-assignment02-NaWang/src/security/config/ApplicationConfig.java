@@ -6,13 +6,11 @@ import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
 import javax.security.enterprise.identitystore.LdapIdentityStoreDefinition;
 
 
-
-
 @CustomFormAuthenticationMechanismDefinition
 (
-		loginToContinue = @LoginToContinue(
-				loginPage="/security/customLogin.xhtml", 
-				errorPage="/security/customLogin.xhtml?error")
+	loginToContinue = @LoginToContinue(
+	loginPage="/security/customLogin.xhtml", 
+	errorPage="/security/customLogin.xhtml?error")
 )
 
 
