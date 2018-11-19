@@ -74,6 +74,25 @@
         	</b:dropMenu>
         </b:navbarLinks>
         
+       <h:form>  
+	        <b:navbarLinks pull="right">
+	        	
+	       		<b:navCommandLink value="Login #{sessionController.remoteUser}" action="#{sessionController.logout()}" 
+	       			rendered="#{sessionController.loggedIn}">
+	       		</b:navCommandLink>	        
+			</b:navbarLinks>
+		</h:form>
+        
+       <h:form>  
+	        <b:navbarLinks pull="right">
+	        	
+	       		<b:navCommandLink value="Logout #{sessionController.remoteUser}" action="#{sessionController.logout()}" 
+	       			rendered="#{sessionController.loggedIn}">
+	       		</b:navCommandLink>	        
+			</b:navbarLinks>
+		</h:form>
+
+        
     </b:navBar>
 
     <b:container>

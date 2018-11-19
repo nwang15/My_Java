@@ -2,6 +2,8 @@ package dmit2015.hr.service;
 
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -11,17 +13,20 @@ import dmit2015.hr.entity.Job;
 import dmit2015.hr.entity.Location;
 
 @Stateless
+@DeclareRoles({"DMIT2015Instructor","DMIT2015Student","PROG_DMIT"})
 public class HumanResourceService {
 
 	@Inject
 	private EntityManager entityManager;
 	
 	// Jobs
+	@RolesAllowed({"DMIT2015Instructor","DMIT2015Student","PROG_DMIT"})
 	public void addJob (Job newJob)
 	{
 		entityManager.persist(newJob);
 	}
 	
+	@RolesAllowed({"DMIT2015Instructor","DMIT2015Student"})
 	public void updateJob (Job existingJob)
 	{
 		entityManager.merge(existingJob);
@@ -38,11 +43,13 @@ public class HumanResourceService {
 //		}
 //		entityManager.remove( existingJob );
 //	}
-	
+	@RolesAllowed({"DMIT2015Instructor"})
 	public void deleteJob(Job existingJob) {
 		existingJob = entityManager.merge(existingJob);
 		entityManager.remove( existingJob );
 	}
+	
+	
 	public void deleteJobById(String JobId) 
 	{
 		Job existingJob = findOneJob(JobId);

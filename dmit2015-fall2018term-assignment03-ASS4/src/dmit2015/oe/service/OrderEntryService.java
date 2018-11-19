@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -25,6 +27,7 @@ import dmit2015.oe.report.CategorySales;
 import dmit2015.oe.report.ProductSales;
 
 @Stateless
+@DeclareRoles({"Investor","	Auditor"})
 public class OrderEntryService {
 
 	@Inject
@@ -185,7 +188,7 @@ public class OrderEntryService {
 				, Category.class)
 				.getResultList();
 	}
-	
+	@RolesAllowed({"Investor","	Auditor"})
 	public List<CategorySales> findCategorSalesForOnlineCatalog() {
 		// TODO: Write the code for this method
 		return entityManager.createQuery(
@@ -198,6 +201,7 @@ public class OrderEntryService {
 				.getResultList();	
 	}
 	
+	@RolesAllowed({"Investor","	Auditor"})
 	public List<CategorySales> findCategorSalesForOnlineCatalogYear(Integer year) {
 		// TODO: Complete the code for this method
 		
@@ -212,6 +216,7 @@ public class OrderEntryService {
 				.getResultList();
 	}
 	
+	@RolesAllowed({"Investor","	Auditor"})
 	public List<CategorySales> findCategorSalesForParentCategoryId(Long parentCategoryId) {
 		// TODO: Complete the code for this method
 		
@@ -237,6 +242,7 @@ public class OrderEntryService {
 			}	
 	}
 	
+	@RolesAllowed({"Investor","	Auditor"})
 	public List<CategorySales> findCategorSalesForParentCategoryIdAndYear(Long parentCategoryId, Integer year) {
 		// TODO: Complete the code for this method
 		if(parentCategoryId != null && parentCategoryId == 90)

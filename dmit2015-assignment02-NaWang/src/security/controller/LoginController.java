@@ -41,19 +41,17 @@ public class LoginController {
 
 
 	public void login() {
-		
 		Credential credential = new UsernamePasswordCredential(username, new Password(password) );
-		
 		HttpServletRequest request = Faces.getRequest();
 		HttpServletResponse response = Faces.getResponse();
-				
-		AuthenticationStatus status = securityContext.authenticate(request, response, AuthenticationParameters.withParams().credential(credential));
-		
+		AuthenticationStatus status = securityContext.authenticate(request, response,
+		AuthenticationParameters.withParams().credential(credential));
 		if (status.equals(AuthenticationStatus.SEND_CONTINUE)) {
-			Faces.responseComplete();
+		Faces.responseComplete();
 		} else if (status.equals(AuthenticationStatus.SEND_FAILURE)) {
-			Messages.addGlobalError("Authentication failed");
+		Messages.addGlobalError("Authentication failed");
 		}
+			
 				
 	}
 }
