@@ -51,9 +51,9 @@
         	
         </b:navbarLinks>
         
-        <h:form>  
-	        <b:navbarLinks pull="right">
-	        	<b:navLink value="Sign In" outcome="/security/customLogin" rendered="#{not sessionController.loggedIn}">
+      <h:form>  
+	        <b:navbarLinks>
+	        	<b:navLink value="Sign In" outcome="/security/login.xhtml" rendered="#{not sessionController.loggedIn}">
 	        	</b:navLink>  
 	        	
 	        	<b:navLink value="Change Password" outcome="/security/changePassword" 
@@ -65,7 +65,8 @@
 	       		</b:navCommandLink>	        
 			</b:navbarLinks>
 		</h:form>
-        
+		
+		
         <b:navbarLinks pull="right">
         	<h:form style="display:inline" styleClass="form-inline">
 	       		<b:selectOneMenu id="langauges" 

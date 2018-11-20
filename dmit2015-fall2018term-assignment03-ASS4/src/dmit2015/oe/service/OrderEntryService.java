@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -27,6 +28,7 @@ import dmit2015.oe.report.CategorySales;
 import dmit2015.oe.report.ProductSales;
 
 @Stateless
+@PermitAll
 @DeclareRoles({"Investor","	Auditor"})
 public class OrderEntryService {
 
@@ -188,16 +190,15 @@ public class OrderEntryService {
 				, Category.class)
 				.getResultList();
 	}
-	@RolesAllowed({"Investor","	Auditor"})
+	@RolesAllowed({"Investor","Auditor"})
 	public List<CategorySales> findCategorSalesForOnlineCatalog() {
 		// TODO: Write the code for this method
 		return entityManager.createQuery(
-				"SELECT new dmit2015.oe.report.CategorySales(c.parentCategory.categoryName, SUM(oi.unitPrice * oi.quantity))"
-				+ " FROM OrderItem oi, IN (oi.productInformation) pi, IN (pi.category) c "
-				+ " WHERE c.parentCategory.categoryId <> :checkId"
-				+ " GROUP BY c.parentCategory.categoryName",
+				"SELECT new dmit2015.oe.report.CategorySales(pc.categoryName, SUM(od.unitPrice * od.quantity)) "
+				+ " FROM OrderItem od, IN (od.productInformation) p, IN (p.category) c, IN (c.parentCategory) pc,IN (od.order) o "	
+				+ " Where c.parentCategory.categoryId = 10 or c.parentCategory.categoryId = 20 or c.parentCategory.categoryId = 30 "
+				+ " GROUP BY pc.categoryName",
 				CategorySales.class)
-				.setParameter("checkId",90L)
 				.getResultList();	
 	}
 	
@@ -270,7 +271,7 @@ public class OrderEntryService {
 		}
 		
 	}
-		
+	@RolesAllowed({"Investor"})
 	public List<ProductSales> findProductSales(int maxResult) {
 		// TODO: Complete the code for this method
 		
@@ -282,7 +283,7 @@ public class OrderEntryService {
 				+ " ORDER BY SUM(oi.unitPrice * oi.quantity) DESC",
 				ProductSales.class).setMaxResults(maxResult).getResultList();
 	}
-	
+	@RolesAllowed({"Investor"})
 	public List<ProductSales> findProductSalesForYear(Integer year, int maxResult) {
 		// TODO: Complete the code for this method
 		

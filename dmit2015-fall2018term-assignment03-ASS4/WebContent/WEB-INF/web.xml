@@ -141,7 +141,7 @@
 	</security-constraint>
 	
 	
-		
+		<!-- Error pages -->
 
 	<error-page>
 		<error-code>401</error-code>
@@ -155,29 +155,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/errorpages/500.xhtml</location>
 	</error-page>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
   
