@@ -34,6 +34,9 @@
       <class>dmit2015.hr.entity.JobHistoryPK</class>
       <class>dmit2015.hr.entity.Location</class>
       <class>dmit2015.hr.entity.Region</class>
+      
+       <class>security.entity.LoginUser</class>
+      <class>security.entity.LoginGroup</class>
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.show_sql" value="false" />

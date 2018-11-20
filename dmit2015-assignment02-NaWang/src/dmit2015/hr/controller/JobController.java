@@ -99,12 +99,9 @@ public class JobController implements Serializable {
 				Messages.addFlashGlobalInfo("Update was successful.");
 				outcome = "viewJobs?faces-redirect=true";
 			}
-		}catch(EJBAccessException e)
-		{
-			Messages.addGlobalError(e.getMessage());			
-		}catch(Exception e)
-		{
-			Messages.addGlobalError("Update was not successful.");
+		}catch (Exception e) {
+			Messages.addGlobalError("Update unsuccessful");	
+			Messages.addGlobalError("{0}", e.getMessage());	
 		}
 		
 		return outcome;
@@ -121,12 +118,9 @@ public class JobController implements Serializable {
 			jobDetail = new Job();
 			editMode = false;
 			outcome = "viewJobs?faces-redirect=true";
-		}catch(EJBAccessException e)
-		{
-			Messages.addGlobalError(e.getMessage());			
-		}catch(Exception e)
-		{
-			Messages.addGlobalError("Remove was not successful.");
+		}catch (Exception e) {
+			Messages.addGlobalError("Delete unsuccessful");			
+			Messages.addGlobalError("{0}", e.getMessage());	
 		}
 		
 		return outcome;
