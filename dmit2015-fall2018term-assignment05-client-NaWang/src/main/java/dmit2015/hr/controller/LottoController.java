@@ -9,6 +9,7 @@ import org.omnifaces.util.Messages;
 
 import dmit2015.soap.HumanResourceService;
 import dmit2015.soap.HumanResourceXmlWebService;
+import dmit2015.soap.Job;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,12 +24,18 @@ public class LottoController implements Serializable {
 	
 	private HumanResourceXmlWebService hrService;
 	
+	private int number;
+	private List<Job> jobs;
+
+	private String jobID;
+	private Job oneJob ;
 	
-	
-	
+
 	@PostConstruct
 	public void pageLoad() {
 		hrService = hrEndPoint.getHumanResourcePort();
+		jobs = hrService.findAllJobs();
+		
 	}
 	
 	public void doLuckyNumber() {
@@ -36,7 +43,46 @@ public class LottoController implements Serializable {
 		Messages.addGlobalInfo("Your lucky number is {0}", luckyNumber);
 	}
 	
+	public void getLuckyNumbers() {
+		String luckyNumber = hrService.sortLuckyNumber(number);
+		Messages.addGlobalInfo("Your lucky number is {0}", luckyNumber);
+	}
 	
+	
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+
+	public String getJobID() {
+		return jobID;
+	}
+
+	public void setJobID(String jobID) {
+		this.jobID = jobID;
+	}
+
+	public Job getOneJob() {
+		return oneJob;
+	}
+
+	public void setOneJob(Job oneJob) {
+		this.oneJob = oneJob;
+	}
+
+	public Job findOneJob() {
+		return oneJob = hrService.findOneJob(jobID);
+	}
 	
 	
 	

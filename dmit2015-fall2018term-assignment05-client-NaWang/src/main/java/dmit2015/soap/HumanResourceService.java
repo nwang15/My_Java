@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "HumanResourceService", targetNamespace = "http://localhost/", wsdlLocation = "http://192.168.73.132:8080/dmit2015-fall2018term-assignment05-server-start/HumanResourceService?wsdl")
+@WebServiceClient(name = "HumanResourceService", targetNamespace = "http://localhost/", wsdlLocation = "http://192.168.48.128:8080/dmit2015-fall2018term-assignment05-server-start/HumanResourceService?wsdl")
 public class HumanResourceService
     extends Service
 {
@@ -30,7 +30,7 @@ public class HumanResourceService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://192.168.73.132:8080/dmit2015-fall2018term-assignment05-server-start/HumanResourceService?wsdl");
+            url = new URL("http://192.168.48.128:8080/dmit2015-fall2018term-assignment05-server-start/HumanResourceService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

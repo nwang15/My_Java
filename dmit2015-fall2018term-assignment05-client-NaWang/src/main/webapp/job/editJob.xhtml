@@ -14,8 +14,8 @@
 
 	<ui:define name="maincontent">
 		<f:metadata>
-			<f:viewParam name="id" value="#{jobCRUDController.idQueryValue}" />
-			<f:event listener="#{jobCRUDController.findByQueryParameterId()}" type="preRenderView"></f:event>
+			<f:viewParam name="id" value="#{lottoController.jobID}" />
+			<f:event listener="#{lottoController.findOneJob()}" type="preRenderView"></f:event>
 		</f:metadata>
 
 		<b:jumbotron>
@@ -33,7 +33,7 @@
 					
 					<b:inputText id="queryValue" 
 						label="Search Job ID" 
-						value="#{jobCRUDController.idQueryValue}"
+						value="#{lottoController.jobID}"
 						placeholder="enter a jobId to search for">
 						<b:focus />
 					</b:inputText>
@@ -42,7 +42,7 @@
 						icon-awesome="search"
 						look="info"
 						ajax="true" update="messages editForm:querySingleResultPanel"
-						actionListener="#{jobCRUDController.findJob()}">
+						actionListener="#{lottoController.findOneJob()}">
 					</b:commandButton>
 						
 				</b:panel>
@@ -52,30 +52,30 @@
 			<p:outputPanel id="querySingleResultPanel">
 			
 				<b:panel title="Job Details" 
-					rendered="#{existingJob != null ? 'true' : 'false'}"> 
+					rendered="#{lottoController.oneJob !=null ? 'true' : 'false'}"> 
 					
 					<b:inputText id="jobId" 
 						label="JobID" 
-						value="#{existingJob.jobId}"
+						value="#{lottoController.oneJob.jobId}"
 						readonly="true"
 						placeholder="Enter job id">
 					</b:inputText>
 					
 					<b:inputText id="jobTitle" 
 						label="Job Title" 
-						value="#{existingJob.jobTitle}"
+						value="#{lottoController.oneJob.jobTitle}"
 						placeholder="Enter job title">
 					</b:inputText>
 					
 					<b:inputText id="minSalary" 
 						label="Minimum Salary" 
-						value="#{existingJob.minSalary}"
+						value="#{lottoController.oneJob.minSalary}"
 						placeholder="Enter minimum salary">
 					</b:inputText>
 					
 					<b:inputText id="maxSalary" 
 						label="Maximum Salary" 
-						value="#{existingJob.maxSalary}"
+						value="#{lottoController.oneJob.maxSalary}"
 						placeholder="Enter maximum salary">
 					</b:inputText>
 

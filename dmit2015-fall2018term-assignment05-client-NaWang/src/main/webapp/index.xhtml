@@ -17,7 +17,25 @@
 
 		<h1>#{text['title']}</h1>
 		<h2>#{text['assignment']} 5 - Java XML Web Services</h2>
+		<b:messages id="messages"/>
+	
 
-	</ui:define>
 
+		<b:form>
+			<b:commandButton value="Enter lucky number" 
+			action="#{lottoController.doLuckyNumber()}" update="messages">
+			</b:commandButton>	
+			
+			<b:inputText id="count" 
+						label="Number Count" 						
+						value="#{lottoController.number}"
+						placeholder="Enter lucky number?">
+					</b:inputText>
+			
+			
+			<b:commandButton value="Enter some lucky numbers" 
+			action="#{lottoController.getLuckyNumbers()}" update="messages">
+			</b:commandButton>		
+		</b:form>
+		</ui:define>
 </ui:composition>

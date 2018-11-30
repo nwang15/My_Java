@@ -1,7 +1,9 @@
 
 package dmit2015.soap;
 
+import java.util.List;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -24,6 +26,31 @@ public interface HumanResourceXmlWebService {
 
     /**
      * 
+     * @param times
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(name = "LuckyNumber", targetNamespace = "")
+    @RequestWrapper(localName = "sortLuckyNumber", targetNamespace = "http://localhost/", className = "dmit2015.soap.SortLuckyNumber")
+    @ResponseWrapper(localName = "sortLuckyNumberResponse", targetNamespace = "http://localhost/", className = "dmit2015.soap.SortLuckyNumberResponse")
+    public String sortLuckyNumber(
+        @WebParam(name = "times", targetNamespace = "")
+        int times);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<dmit2015.soap.Job>
+     */
+    @WebMethod
+    @WebResult(name = "allJobs", targetNamespace = "")
+    @RequestWrapper(localName = "findAllJobs", targetNamespace = "http://localhost/", className = "dmit2015.soap.FindAllJobs")
+    @ResponseWrapper(localName = "findAllJobsResponse", targetNamespace = "http://localhost/", className = "dmit2015.soap.FindAllJobsResponse")
+    public List<Job> findAllJobs();
+
+    /**
+     * 
      * @return
      *     returns int
      */
@@ -32,5 +59,19 @@ public interface HumanResourceXmlWebService {
     @RequestWrapper(localName = "luckyLottoNumber", targetNamespace = "http://localhost/", className = "dmit2015.soap.LuckyLottoNumber")
     @ResponseWrapper(localName = "luckyLottoNumberResponse", targetNamespace = "http://localhost/", className = "dmit2015.soap.LuckyLottoNumberResponse")
     public int luckyLottoNumber();
+
+    /**
+     * 
+     * @param jobid
+     * @return
+     *     returns dmit2015.soap.Job
+     */
+    @WebMethod
+    @WebResult(name = "findOneJob", targetNamespace = "")
+    @RequestWrapper(localName = "findOneJob", targetNamespace = "http://localhost/", className = "dmit2015.soap.FindOneJob")
+    @ResponseWrapper(localName = "findOneJobResponse", targetNamespace = "http://localhost/", className = "dmit2015.soap.FindOneJobResponse")
+    public Job findOneJob(
+        @WebParam(name = "jobid", targetNamespace = "")
+        String jobid);
 
 }
